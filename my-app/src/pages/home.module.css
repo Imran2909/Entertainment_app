@@ -1,0 +1,21 @@
+/* Adjustments for the main container and content */
+.main {
+    display: flex;
+    flex-direction: column; /* Ensure content stacks vertically */
+    height: 100vh; /* Ensure full viewport height */
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+.top {
+    position: fixed;
+    width: 100%;
+    z-index: 1000; /* Ensure high z-index */
+    background-color: #fff; /* Ensure background is visible */
+    margin-top: 20px;
+}
+
+.content {
+    margin-top: 60px; /* Adjust based on Navbar height */
+    flex: 1; /* Fill remaining vertical space */
+    margin-left:6px;
+}

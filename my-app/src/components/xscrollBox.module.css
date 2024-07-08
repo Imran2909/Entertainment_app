@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.josefin-sans {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+}
+
+.box {
+    width: 330px;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: cover;
+    animation: scroll 200s linear infinite;
+}
+
+.box img{
+    border-radius: 10px;
+}
+.box1 {
+    margin-left: 100px;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-top: -50px;
+    font-weight: 500;
+}
+
+.trending {
+    /* border: 1px solid; */
+    height: 200px;
+    display: flex;
+    overflow-x: scroll;
+    /* scrollbar-width: thin; */
+    scrollbar-color: transparent transparent; 
+}
+
+.trending::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.trending::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 2px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-330px*16.4*2));
+    }
+}
+.box h2 {
+    position: relative;
+    font-size: 18px;
+    margin: 4px 9px;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.box p {
+    color: rgb(255, 255, 255);
+    margin: 0px 10px;
+    margin-top: -50px;
+}
+.dot{
+    height: 3px;
+    width: 3px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    display: inline-block;
+    margin: 3px 1px;
+}
+.small{
+    margin: -3px 1px;
+}
+.media{
+    position: relative;
+    margin-right: 8px;
+}
+a{
+    text-decoration: none;
+}
+
+a p, a h2{
+    text-decoration: none;
+}
+
+.bookmark{
+    position: relative;
+    width: 8px;
+    height: auto;
+    padding: 4px 2px 1px 19px;
+    margin: 10px 2px -35px 263px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.bookmark svg{
+    margin: 3px -2px 1px -12px;
+    padding: 0px 0px 0px 0px;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+}
+
+.bookmark:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.trending:hover .box {
+    animation-play-state: paused; /* Pause animation on hover of .trending */
+}

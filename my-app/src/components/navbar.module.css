@@ -1,0 +1,35 @@
+*{
+    background: transparent;
+}
+.container{
+    width: 1240px;
+    height: 45px;
+    margin: -70px 2px;
+    display: flex;
+    /* border: 1px solid; */
+    margin-left: 100px;
+}
+.search{
+    width: 40px;
+    height: 40px;
+    margin: 12px 20px;
+}
+.search svg{
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    font-weight: bolder;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.input input{
+    outline: none;
+    border: none;
+    margin: 13px -10px;
+    height: 24px;
+    width: 800px;
+    font-size: 20px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.input{
+    outline: none;
+}

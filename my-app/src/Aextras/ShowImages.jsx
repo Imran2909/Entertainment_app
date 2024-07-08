@@ -5,7 +5,7 @@ const ShowImages = () => {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState('');
 
-  const tmdbApiKey = '5ae304b91cd12d71e100db44c6812cb6';
+  // const tmdbApiKey = '5ae304b91cd12d71e100db44c6812cb6';
 
   const handleSearch = async (e) => {
     e.preventDefault();

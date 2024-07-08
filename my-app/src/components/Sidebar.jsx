@@ -13,8 +13,6 @@ import { toggleThemeAction } from '../redux/action';
 import { IoMoonSharp } from "react-icons/io5";
 
 function Sidebar() {
-    let arr = [<PiSquaresFourFill />, <TbMovie />, <PiTelevisionFill />, <FaBookmark />]
-    let links = ["/", "/movies", "/tvseries", "/bookmark"]
     const theme = useSelector((store) => store.theme)
     const avatar = useSelector((store) => store.avatar)
     const dispatch = useDispatch()
@@ -26,45 +24,35 @@ function Sidebar() {
 
     return (
         <div>
-            <div className={styles.container} >
-
-                <div className={styles.top} >
-                    <NavLink to={"/"} className={styles.logo} > <BiSolidMovie /> </NavLink>
-                </div>
-
-
-                <div className={styles.mid} >
-                    <div className={styles.icons} >
-                        {
-                            arr.map((el, ind) => {
-                                return (
-                                    <NavLink key={ind} className={({ isActive }) => isActive ? styles.activeNavlink : styles.nonActive}
-                                        to={`${links[ind]}`} > {el} </NavLink>
-                                )
-                            })
-                        }
+            <div className={styles.box}>
+                <div className={styles.container} >
+                    <div className={styles.top} >
+                        <NavLink to={"/"} className={styles.logo} > <BiSolidMovie /> </NavLink>
+                    </div>
+                    <div className={styles.mid} >
+                        <div className={styles.icons} >
+                            <NavLink className={({ isActive }) => isActive ? styles.activeNavlink : styles.nonActive}
+                                to={'/home'} > <PiSquaresFourFill /> </NavLink>
+                            <NavLink className={({ isActive }) => isActive ? styles.activeNavlink : styles.nonActive}
+                                to={'/movies'} > <TbMovie /> </NavLink>
+                            <NavLink className={({ isActive }) => isActive ? styles.activeNavlink : styles.nonActive}
+                                to={'/tvseries'} > <PiTelevisionFill /> </NavLink>
+                            <NavLink className={({ isActive }) => isActive ? styles.activeNavlink : styles.nonActive}
+                                to={'/bookmark'} > <FaBookmark /> </NavLink>
+                        </div>
+                    </div>
+                    <div className={styles.bottom} >
+                        <div onClick={toggleTheme} className={theme === "light" ? styles.lightTheme : styles.darkTheme} >
+                            {
+                                theme === "light" ? <IoSunny /> : <IoMoonSharp />
+                            }
+                        </div>
+                        <div className={styles.avatar} >
+                            <img src={avatar} alt="No" />
+                        </div>
                     </div>
                 </div>
-
-
-                <div className={styles.bottom} >
-                    <div onClick={toggleTheme} className={theme === "light" ? styles.lightTheme : styles.darkTheme} >
-                        {
-                            theme === "light" ? <IoSunny /> : <IoMoonSharp />
-                        }
-                    </div>
-                    <div className={styles.avatar} >
-                        <img src={avatar} alt="No" />
-                    </div>
-                </div>
-
             </div>
-
-
-            <div>
-                <Allroutes />
-            </div>
-
         </div>
     )
 }

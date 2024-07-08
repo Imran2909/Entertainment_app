@@ -6,8 +6,8 @@ const MovieSearch = () => {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState('');
 
-  const apiKey = 'AIzaSyDNmveSYDSSKaKK6I1UmhRR8p8xdKK8BLo';
-  const tmdbApiKey = '5ae304b91cd12d71e100db44c6812cb6';
+  // const apiKey = 'AIzaSyDNmveSYDSSKaKK6I1UmhRR8p8xdKK8BLo';
+  // const tmdbApiKey = '5ae304b91cd12d71e100db44c6812cb6';
 
   const handleSearch = async (e) => {
     e.preventDefault();
