@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.josefin-sans {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+}
+
+.container{
+    /* border: 1px solid; */
+    height: 350px;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+.heading{
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+}
+.component{
+    /* border: 1px solid green; */
+    height: 325px;
+    display: grid;
+    row-gap: -10px;
+    column-gap: 20px;
+    grid-template-columns: repeat(5,1fr);
+    margin-top: 10px;
+}

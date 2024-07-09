@@ -27,7 +27,7 @@ function Sidebar() {
             <div className={styles.box}>
                 <div className={styles.container} >
                     <div className={styles.top} >
-                        <NavLink to={"/"} className={styles.logo} > <BiSolidMovie /> </NavLink>
+                        <NavLink to={"/"} className={styles.logo} > <BiSolidMovie style={{color:"red"}} /> </NavLink>
                     </div>
                     <div className={styles.mid} >
                         <div className={styles.icons} >

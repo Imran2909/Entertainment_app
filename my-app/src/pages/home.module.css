@@ -1,21 +1,43 @@
-/* Adjustments for the main container and content */
+*{
+    /* color: white; */
+}
 .main {
     display: flex;
-    flex-direction: column; /* Ensure content stacks vertically */
-    height: 100vh; /* Ensure full viewport height */
-    overflow-x: hidden; /* Hide horizontal overflow */
+    flex-direction: column; 
+    height: auto; 
+    overflow-x: hidden; 
+    /* border: 2px solid red; */
+    /* scrollbar-width: thin; * /
+    /* scrollbar-color: transparent transparent; */
+    background-color: #212738;
+    padding-bottom: 8px;
+}
+.main1{
+    display: flex;
+    flex-direction: column; 
+    height: auto; 
+    overflow-x: hidden; 
+    background-color: #ffffff;
+    padding-bottom: 8px;
 }
 
 .top {
     position: fixed;
     width: 100%;
-    z-index: 1000; /* Ensure high z-index */
-    background-color: #fff; /* Ensure background is visible */
+    z-index: 1000; 
+    background-color: #fff;
     margin-top: 20px;
+    background: white;
 }
 
 .content {
-    margin-top: 60px; /* Adjust based on Navbar height */
-    flex: 1; /* Fill remaining vertical space */
+    margin-top: 60px; 
+    flex: 1; 
     margin-left:6px;
+    /* border: 1px solid; */
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+.content:first-child{
+    /* border: 1px solid; */
 }

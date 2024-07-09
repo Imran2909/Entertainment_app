@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.josefin-sans {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+}
+*{
+    color: white;
+}
+.container {
+    /* border: 1px solid red; */
+    width: 220px;
+    height: 186px;
+}
+
+.container img {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.container img:hover{
+    width: 101.2%;
+    margin-left: -1.5px;
+    margin-top: -2px;
+    padding-bottom: -1px;
+    transition: 0.5s;
+    box-shadow: rgba(255, 255, 255, 0.986) 0px 2px 4px 0px, rgba(255, 255, 255, 0.32) 0px 2px 16px 0px;
+}
+
+.container img:hover .desc{
+    margin-top: 11px;
+}
+
+.dot {
+    height: 3px;
+    width: 3px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    display: inline-block;
+    margin: 3px 6px;
+}
+
+.small {
+    margin: -3px 1px;
+}
+
+.media {
+    position: relative;
+    margin-right: 1px;
+}
+.desc p span{
+    font-size: 12px;
+}
+.desc p svg{
+    font-size: 14px;
+    margin-right: 3px;
+}
+.desc {
+    margin-top: -11px;
+}
+.name{
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -14px;
+}
+
+
+.bookmark {
+    position: relative;
+    width: 8px;
+    height: auto;
+    padding: 4px 2px 1px 19px;
+    margin: 10px 2px -35px 180px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0,0.2);
+    cursor: pointer;
+}
+
+.bookmark:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.bookmark svg {
+    margin: 3px -2px 1px -12px;
+    padding: 0px 0px 0px 0px;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.booked {
+    font-size: 22px;
+    scale: 1.3;
+    margin: 0px 0px 0px 0px;
+}
+
+.bookmark svg:hover {
+    transition: 0.25s; 
+    font-size: 16px;
+    margin-top: 2px;
+}
+
