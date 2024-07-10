@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, removeBookmark } from '../redux/action'
 import { FaRegBookmark } from "react-icons/fa";
 import { IoMdBookmark } from "react-icons/io";
+import { Link, Route } from 'react-router-dom'
 
 function Component(props) {
     const bookmark = useSelector((store) => store.bookmark)
@@ -16,7 +17,7 @@ function Component(props) {
     const RemoveBookmark = (ID) => {
         dispatch(removeBookmark(ID))
     }
-    // console.log(props);
+
     return (
         <div>
             <div className={styles.container} >
@@ -26,7 +27,9 @@ function Component(props) {
                             <FaRegBookmark onClick={() => AddBookmark(props.id)} />
                     }
                 </div>
-                <img src={`https://image.tmdb.org/t/p/w200${props.backdrop_path}`} alt="" />
+                <Link to={`detail/${props.id}`} >
+                    <img src={`https://image.tmdb.org/t/p/w200${props.backdrop_path}`} alt="" />
+                </Link>
                 <div className={styles.desc} >
                     <p className={styles['josefin-sans']}>
                         <span>
@@ -43,9 +46,9 @@ function Component(props) {
                 </div>
                 <div className={styles.name} >
                     {
-                    props.ID < 20 ?
-                    props.title && props.title.length > 21 ? props.title.slice(0, 20) + "..." : props.title :
-                    props.name && props.name.length > 21 ? props.name.slice(0, 20) + "..." : props.name                 
+                        props.ID < 20 ?
+                            props.title && props.title.length > 21 ? props.title.slice(0, 20) + "..." : props.title :
+                            props.name && props.name.length > 21 ? props.name.slice(0, 20) + "..." : props.name
                     }
                 </div>
             </div>

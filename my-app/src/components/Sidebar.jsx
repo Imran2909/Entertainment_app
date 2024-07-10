@@ -32,7 +32,7 @@ function Sidebar() {
                     <div className={styles.mid} >
                         <div className={styles.icons} >
                             <NavLink className={({ isActive }) => isActive ? styles.activeNavlink : styles.nonActive}
-                                to={'/home'} > <PiSquaresFourFill /> </NavLink>
+                                to={'/'} > <PiSquaresFourFill /> </NavLink>
                             <NavLink className={({ isActive }) => isActive ? styles.activeNavlink : styles.nonActive}
                                 to={'/movies'} > <TbMovie /> </NavLink>
                             <NavLink className={({ isActive }) => isActive ? styles.activeNavlink : styles.nonActive}

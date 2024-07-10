@@ -6,8 +6,8 @@ import axios from 'axios';
 function Recomended() {
     const [data, setData] = useState([])
     const apiKey = '5ae304b91cd12d71e100db44c6812cb6';
-    const movieUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
-    const tvUrl = `https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=en-US&page=1`;
+    const movieUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=5ae304b91cd12d71e100db44c6812cb6&language=en-US&page=1`;
+    const tvUrl = `https://api.themoviedb.org/3/tv/on_the_air?api_key=5ae304b91cd12d71e100db44c6812cb6&language=en-US&page=1`;
 
     useEffect(() => {
         async function fetchData() {
@@ -36,7 +36,7 @@ function Recomended() {
                         data.length > 0 && data?.map((el, ind) => {
                             return (
                                 <Component key={el.id} {...el} ID={ind} />
-                            )
+                           )
                         })
                     }
 
