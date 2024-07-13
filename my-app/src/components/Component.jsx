@@ -31,9 +31,9 @@ function Component({ IDe, ...props }) {
                     }
                 </div>
                 {
-                    IDe < 20 ? <Link to={`movieDetail/${props.id}`}  >
+                    IDe < 20 ? <Link to={`/movieDetail/${props.id}`}  >
                         <img src={`https://image.tmdb.org/t/p/w200${props.backdrop_path}`} alt="" />
-                    </Link> : <Link to={`tvSeriesDetail/${props.id}`}  >
+                    </Link> : <Link to={`/tvSeriesDetail/${props.id}`}  >
                         <img src={`https://image.tmdb.org/t/p/w200${props.backdrop_path}`} alt="" />
                     </Link>
                 }

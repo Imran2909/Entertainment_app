@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
-import styles from './home.module.css';
+import styles from './main.module.css';
 import Allroutes from '../components/Allroutes';
 
 function Main() {

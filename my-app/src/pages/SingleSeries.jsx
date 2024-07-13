@@ -38,7 +38,7 @@ function SingleSeries() {
           series && series ? <div className={styles.main}>
             <div className={styles.top} >
               <div className={styles.img} >
-                <img className={styles.poster} src={`https://image.tmdb.org/t/p/w300${series.poster_path}`} alt={series.name} />
+                <img className={styles.poster} src={`https://image.tmdb.org/t/p/w300${series.poster_path}`} alt={"No image avl."} />
                 <div className={styles.links}>
                   <div>
                     <a href={series.homepage} target="_blank" rel="noopener noreferrer" className={styles.website} >Visit Website   </a>

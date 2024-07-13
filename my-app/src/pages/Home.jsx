@@ -11,7 +11,7 @@ function Home() {
     const theme=useSelector((store)=>store.theme)
 
     return (
-        <div className={theme==="light1" ? styles.main1 : styles.main }>
+        <div className={theme==="light" ? styles.main1 : styles.main }>
             <div className={styles.top}>
                 <Navbar text="movies or TV series" />
             </div>

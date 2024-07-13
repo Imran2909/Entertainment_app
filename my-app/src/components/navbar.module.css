@@ -4,10 +4,10 @@
 .container{
     width: 1240px;
     height: 45px;
-    margin: -70px 2px;
+    margin: 0px 2px;
     display: flex;
     /* border: 1px solid; */
-    margin-left: 100px;
+    background-color: #212738;
 }
 .search{
     width: 40px;

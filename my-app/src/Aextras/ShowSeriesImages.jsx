@@ -35,14 +35,14 @@ const ShowSeriesImages = (props) => {
 
   return (
     <div>
-      <div>
+      <div style={{display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:"40px" }} >
         {images && images?.length > 1 ?
           images.map((image, index) => (
             <img
               key={index}
               src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
               alt="Movie scene"
-              style={{ width: '200px', height: 'auto', margin: '10px' }}
+              style={{ width: '100%', height: 'auto', borderRadius:"10px" }}
             />
           )) : <h2>No screenshots available for this tv series </h2>
         }

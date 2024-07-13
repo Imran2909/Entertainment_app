@@ -1,0 +1,24 @@
+.main {
+    display: flex;
+    flex-direction: column; 
+    height: auto; 
+    overflow-x: hidden; 
+    /* scrollbar-width: thin; * /
+    /* scrollbar-color: transparent transparent; */
+    background-color: #212738;
+    padding-bottom: 8px;
+}
+
+.content {
+    margin-top: 60px; 
+    flex: 1; 
+    margin-left:6px;
+    /* border: 1px solid; */
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    width: 90%;
+    margin-left: 8%;
+}
+.side{
+    /* border: 2px solid red; */
+}
