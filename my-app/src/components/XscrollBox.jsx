@@ -56,7 +56,7 @@ function XscrollBox(props) {
                                     </Button>
                                 </Tooltip>
                             </div>
-                            <Link to={`detail/${el.id}`} >
+                            <Link to={`movieDetail/${el.id}`} >
                                 <img src={`https://image.tmdb.org/t/p/w300${el.backdrop_path}`} alt="" className={styles.img} />
                                 <p className={styles['josefin-sans']} >{el.release_date.slice(0, 4)} <span className={styles.dot} ></span> <TbMovie className={styles.small} />
                                     <span className={styles.media} >Movie</span>
@@ -83,7 +83,7 @@ function XscrollBox(props) {
                                     </Button>
                                 </Tooltip>
                             </div>
-                            <Link to={`detail/${el.id}`} >
+                            <Link to={`movieDetail/${el.id}`} >
                                 <img src={`https://image.tmdb.org/t/p/w300${el.backdrop_path}`} alt="" className={styles.img} />
                                 <p className={styles['josefin-sans']} >{el.release_date.slice(0, 4)} <span className={styles.dot} ></span> <TbMovie className={styles.small} />
                                     <span className={styles.media} >Movie</span>

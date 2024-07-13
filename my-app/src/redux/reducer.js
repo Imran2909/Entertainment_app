@@ -1,4 +1,4 @@
-import { ADD_BOOKMARK, REMOVE_BOOKMARK, TOGGLE_THEME } from "./actionTypes"
+import { ADD_BOOKMARK, FETCH_MOVIES_SUCCESS, REMOVE_BOOKMARK, TOGGLE_THEME } from "./actionTypes"
 
 export const reducer = (state, { type, payload }) => {
     switch (type) {
@@ -12,7 +12,11 @@ export const reducer = (state, { type, payload }) => {
                     return el !== payload
                 })
             }
-
+        case FETCH_MOVIES_SUCCESS:
+            return {
+                ...state,
+                movies: payload,
+            };
         default:
             return state
     }

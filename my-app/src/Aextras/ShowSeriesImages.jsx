@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from "../pages/singleDetail.module.css"
 
-const ShowImages = (props) => {
+const ShowSeriesImages = (props) => {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState('');
 
@@ -10,7 +9,7 @@ const ShowImages = (props) => {
 
   useEffect(() => {
     const handleSearch = async () => {
-      const tmdbResponse = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
+      const tmdbResponse = await axios.get(`https://api.themoviedb.org/3/search/tv`, {
         params: {
           api_key: tmdbApiKey,
           query: props.title,
@@ -22,12 +21,13 @@ const ShowImages = (props) => {
         return;
       }
       const movieId = tmdbResponse.data.results[0].id;
-      const imagesResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/images`, {
+      const imagesResponse = await axios.get(`https://api.themoviedb.org/3/tv/${movieId}/images`, {
         params: {
           api_key: tmdbApiKey,
         },
       });
       const movieImages = imagesResponse.data.backdrops.slice(0, 12)
+      console.log("series images", movieImages);
       setImages(movieImages);
     };
     handleSearch()
@@ -35,17 +35,20 @@ const ShowImages = (props) => {
 
   return (
     <div>
-      <div className={styles.allImg} >
-        {images && images.map((image, index) => (
-          <img
-            key={index}
-            src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
-            alt="Movie scene"
-          />
-        ))}
+      <div>
+        {images && images?.length > 1 ?
+          images.map((image, index) => (
+            <img
+              key={index}
+              src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
+              alt="Movie scene"
+              style={{ width: '200px', height: 'auto', margin: '10px' }}
+            />
+          )) : <h2>No screenshots available for this tv series </h2>
+        }
       </div>
     </div>
   );
 };
 
-export default ShowImages;
+export default ShowSeriesImages;

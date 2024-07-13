@@ -5,14 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, removeBookmark } from '../redux/action'
 import { FaRegBookmark } from "react-icons/fa";
 import { IoMdBookmark } from "react-icons/io";
-import { Link, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom';
 
-function Component(props) {
+
+
+function Component({ IDe, ...props }) {
     const bookmark = useSelector((store) => store.bookmark)
+
+    // console.log("props", props);
     const dispatch = useDispatch()
     const AddBookmark = (ID) => {
         dispatch(addBookmark(ID))
-
     }
     const RemoveBookmark = (ID) => {
         dispatch(removeBookmark(ID))
@@ -27,9 +30,15 @@ function Component(props) {
                             <FaRegBookmark onClick={() => AddBookmark(props.id)} />
                     }
                 </div>
-                <Link to={`detail/${props.id}`} >
-                    <img src={`https://image.tmdb.org/t/p/w200${props.backdrop_path}`} alt="" />
-                </Link>
+                {
+                    IDe < 20 ? <Link to={`movieDetail/${props.id}`}  >
+                        <img src={`https://image.tmdb.org/t/p/w200${props.backdrop_path}`} alt="" />
+                    </Link> : <Link to={`tvSeriesDetail/${props.id}`}  >
+                        <img src={`https://image.tmdb.org/t/p/w200${props.backdrop_path}`} alt="" />
+                    </Link>
+                }
+
+
                 <div className={styles.desc} >
                     <p className={styles['josefin-sans']}>
                         <span>
@@ -38,7 +47,7 @@ function Component(props) {
                         <span className={styles.dot}></span>
                         <TbMovie className={styles.small} />
                         <span className={styles.media}>{
-                            props.ID < 20 ? "Movie" : "TV Show"
+                            IDe < 20 ? "Movie" : "TV Show"
                         }</span>
                         <span className={styles.dot}></span>
                         <span className={styles.media}>{props.adult ? "E" : "PG"}</span>
@@ -46,7 +55,7 @@ function Component(props) {
                 </div>
                 <div className={styles.name} >
                     {
-                        props.ID < 20 ?
+                    IDe < 20 ?
                             props.title && props.title.length > 21 ? props.title.slice(0, 20) + "..." : props.title :
                             props.name && props.name.length > 21 ? props.name.slice(0, 20) + "..." : props.name
                     }
@@ -55,5 +64,6 @@ function Component(props) {
         </div>
     )
 }
+
 
 export default Component

@@ -4,7 +4,7 @@ import axios from 'axios';
 const YouTubeSearch = () => {
   const [videos, setVideos] = useState([]);
   const [query, setQuery] = useState(''); // Initial search query
-  // const apiKey = 'AIzaSyDNmveSYDSSKaKK6I1UmhRR8p8xdKK8BLo';
+  const apiKey = 'AIzaSyDNmveSYDSSKaKK6I1UmhRR8p8xdKK8BLo';
 
   useEffect(() => {
     if (query) {
