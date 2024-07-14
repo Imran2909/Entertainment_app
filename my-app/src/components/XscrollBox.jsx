@@ -14,7 +14,7 @@ function XscrollBox(props) {
     // const [bookmark, setBookmark] = useState([])
     const bookmark = useSelector((store) => store.bookmark)
     const dispatch = useDispatch()
-    console.log(bookmark);
+    // console.log(bookmark);
 
     useEffect(() => {
         const fetchData = async () => {

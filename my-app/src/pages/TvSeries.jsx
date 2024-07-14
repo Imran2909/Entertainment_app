@@ -37,7 +37,7 @@ function TvSeries() {
   return (
     <div >
       <div className={styles.navbar}>
-        <Navbar text="movies" />
+        <Navbar text="TV series" />
       </div>
       <div className={styles.heading} >
         Tv Series

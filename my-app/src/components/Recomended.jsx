@@ -16,7 +16,7 @@ function Recomended() {
                 const movieResponse = await axios.get(movieUrl);
                 const tvResponse = await axios.get(tvUrl);
                 const combinedResults = [...movieResponse.data.results, ...tvResponse.data.results];
-                console.log("top rated", combinedResults);
+                // console.log("top rated", combinedResults);
                 setData(combinedResults)
                 return combinedResults
             } catch (error) {

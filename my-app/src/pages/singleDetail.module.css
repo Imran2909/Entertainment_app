@@ -162,10 +162,14 @@
   display: flex;
   justify-content: space-evenly;
 }
-.links div:last-child a {
+.trailer {
   background-color: red;
   padding: 12px 114px;
-
+  font-size: 18px;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
 
 .links div:last-child {
