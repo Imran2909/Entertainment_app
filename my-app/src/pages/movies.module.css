@@ -1,14 +1,25 @@
-.wrapper {
-    /* height: 100vh; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* background-color: #000;  */
-    /* color: white; */
+.spinner {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-top: 50px;
+    margin-left: 190%;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .navbar {
-    /* border: 1px solid red; */
     margin-top: -50px;
 }
 
@@ -21,18 +32,21 @@
     overflow-y: auto;
     margin-top: -30px;
     margin-left: 40px;
-    position:static
+    position: static
 }
 
 .heading {
-    /* border: 1px solid red; */
     margin-left: 60px;
     margin-bottom: 22px;
     font-size: 32px;
     margin-top: 20px;
 }
 
-.container>div{
-    /* border: 2px solid; */
+.container>div {
     margin-bottom: -20px;
 }
+
+.box{
+height: 97.2vh;
+}
+

@@ -3,39 +3,30 @@ import axios from 'axios';
 import styles from './movies.module.css';
 import Navbar from '../components/Navbar';
 import Component from '../components/Component';
+import { useDispatch, useSelector } from 'react-redux';
+import { requestAction, requestTvSeriesDataFetch } from '../redux/action';
+
 
 function TvSeries() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const loading = useSelector((store) => store.isLoading);
+  const error = useSelector((store) => store.isError);
+  const data = useSelector((store) => store.movies);
   const [page, setPage] = useState(1)
+  const dispatch = useDispatch()
 
   const handlePage = (val) => {
     setPage(page + val)
   }
+  
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/tv/on_the_air?api_key=5ae304b91cd12d71e100db44c6812cb6&language=en-US&page=${page}`
-        );
-        setData(response.data.results);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    dispatch(requestAction())
+    dispatch(requestTvSeriesDataFetch(`https://api.themoviedb.org/3/tv/on_the_air?api_key=5ae304b91cd12d71e100db44c6812cb6&language=en-US&page=1`))
+  }, [dispatch]);
 
-    fetchData();
-  }, [page]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div >
+    <div className={styles.box} >
       <div className={styles.navbar}>
         <Navbar text="TV series" />
       </div>
@@ -43,7 +34,9 @@ function TvSeries() {
         Tv Series
       </div>
       <div className={styles.container}>
-        {data && data.map((el, ind) => (
+        {
+        loading ? <div className={styles.spinner}></div> : error ? <h1>Something went wrong</h1> :
+        data && data.map((el, ind) => (
           <Component key={el.id} {...el} IDe={22} />
         ))}
       </div>
