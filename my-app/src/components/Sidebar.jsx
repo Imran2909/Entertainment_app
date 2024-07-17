@@ -27,7 +27,7 @@ function Sidebar() {
             <div className={styles.box}>
                 <div className={styles.container} >
                     <div className={styles.top} >
-                        <NavLink to={"/"} className={styles.logo} > <BiSolidMovie style={{color:"red"}} /> </NavLink>
+                        <NavLink to={"/"} className={styles.logo} > <BiSolidMovie style={{ color: "red" }} /> </NavLink>
                     </div>
                     <div className={styles.mid} >
                         <div className={styles.icons} >
@@ -47,8 +47,10 @@ function Sidebar() {
                                 theme === "light" ? <IoSunny /> : <IoMoonSharp />
                             }
                         </div>
-                        <div className={styles.avatar} >
-                            <img src={avatar} alt="No" />
+                        <div className={styles.avatar}  >
+                            <NavLink to={'/signup'} >
+                                <img src={avatar} alt="No" />
+                            </NavLink>
                         </div>
                     </div>
                 </div>

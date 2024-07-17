@@ -10,9 +10,10 @@ import { requestAction, requestTvSeriesDataFetch } from '../redux/action';
 function TvSeries() {
   const loading = useSelector((store) => store.isLoading);
   const error = useSelector((store) => store.isError);
-  const data = useSelector((store) => store.movies);
+  const data = useSelector((store) => store.tvSeries);
   const [page, setPage] = useState(1)
   const dispatch = useDispatch()
+
 
   const handlePage = (val) => {
     setPage(page + val)

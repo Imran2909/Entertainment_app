@@ -186,7 +186,7 @@ function XscrollBox(props) {
                                         <span className={styles.dot}></span>
                                         <span className={styles.media}>{el.adult ? "E" : "PG"}</span>
                                     </p>
-                                    <h2 className={styles['josefin-sans']}>{el.title}</h2>
+                                    <h2 className={styles['josefin-sans']}>{el.title.length > 22 ? el.title.slice(0,22)+"..." : el.title }</h2>
                                 </Link>
                             </div>
                         </div>
@@ -216,7 +216,9 @@ function XscrollBox(props) {
                                         <span className={styles.dot}></span>
                                         <span className={styles.media}>{el.adult ? "E" : "PG"}</span>
                                     </p>
-                                    <h2 className={styles['josefin-sans']}>{el.title}</h2>
+                                    <h2 className={styles['josefin-sans']}>
+                                       {el.title.length > 22 ? el.title.slice(0,22)+"..." : el.title }
+                                        </h2>
                                 </Link>
                             </div>
                         </div>

@@ -12,7 +12,6 @@ import { Link, Route } from 'react-router-dom';
 function Component({ IDe, ...props }) {
     const bookmark = useSelector((store) => store.bookmark)
 
-    // console.log("props", props);
     const dispatch = useDispatch()
     const AddBookmark = (ID) => {
         dispatch(addBookmark(ID))
@@ -55,7 +54,7 @@ function Component({ IDe, ...props }) {
                 </div>
                 <div className={styles.name} >
                     {
-                    IDe < 20 ?
+                    props.title ?
                             props.title && props.title.length > 21 ? props.title.slice(0, 20) + "..." : props.title :
                             props.name && props.name.length > 21 ? props.name.slice(0, 20) + "..." : props.name
                     }

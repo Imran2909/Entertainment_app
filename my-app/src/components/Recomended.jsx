@@ -13,7 +13,7 @@ function Recomended() {
     
     const loading = useSelector((store) => store.isLoading);
     const error = useSelector((store) => store.isError);
-    const data = useSelector((store) => store.trendingData);
+    const data = useSelector((store) => store.recommendedData);
 
     useEffect(() => {
         const urls={movieUrl,tvUrl}

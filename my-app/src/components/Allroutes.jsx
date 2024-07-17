@@ -6,6 +6,7 @@ import TvSeries from "../pages/TvSeries"
 import Bookmark from "../pages/Bookmark"
 import SingleDetail from "../pages/SingleDetail"
 import SingleSeries from '../pages/SingleSeries'
+import SignUp from '../pages/SignUp'
 
 
 function Allroutes() {
@@ -18,6 +19,7 @@ function Allroutes() {
         <Route path='/bookmark' element={<Bookmark/> } />
         <Route path='/movieDetail/:id' element={<SingleDetail /> } />
         <Route path='/tvSeriesDetail/:id' element={ <SingleSeries/> } />
+        <Route path="/signup" element={ <SignUp/> } />
         <Route path='*' element={<h1>No routes</h1> } />
       </Routes>
   )

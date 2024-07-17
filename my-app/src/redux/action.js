@@ -1,4 +1,4 @@
-import { ADD_BOOKMARK, DATA_FETCH_FAILED, FETCH_MOVIES_SUCCESS, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REQUEST_ACTION, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
+import { ADD_BOOKMARK, DATA_FETCH_FAILED, FETCH_MOVIES_SUCCESS, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REQUEST_ACTION, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
 import axios from 'axios'
 
 export const toggleThemeAction = () => {
@@ -57,11 +57,30 @@ export const requestMovieDataFetch = (payload) => async (dispatch) => {
 }
 
 export const requestTvSeriesDataFetch = (payload) => async (dispatch) => {
-    try {
+    try {          
         const response = await axios.get(payload)
         return dispatch({ type: TVSERIES_DATA_FETCH_COMPLETED, payload: response.data.results })
+    } catch (error) {            
+        dispatch({ type: DATA_FETCH_FAILED })
+    }
+}
+
+export const requestSingleMovieDataFetch = (payload) => async (dispatch) => {
+    try {
+        const response = await axios.get(payload)
+        return dispatch({ type: SINGLE_MOVIE_DATA_FETCH_COMPLETED, payload: response.data })
     } catch (error) {
         dispatch({ type: DATA_FETCH_FAILED })
     }
 }
+
+export const requestSingleSeriesDataFetch = (payload) => async (dispatch) => {
+    try {
+        const response = await axios.get(payload)
+        return dispatch({ type: SINGLE_SERIES_DATA_FETCH_COMPLETED, payload: response.data })
+    } catch (error) {
+        dispatch({ type: DATA_FETCH_FAILED })
+    }
+}
+
 

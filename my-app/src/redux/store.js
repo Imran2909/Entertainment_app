@@ -11,7 +11,9 @@ const initialState = {
     trendingData: [],
     recommendedData: [],
     movies:[],
-    tvSeries:[]
+    tvSeries:[],
+    singleSeries:[],
+    singleMovie:[]
 };
 
 const middleware = [thunk];
