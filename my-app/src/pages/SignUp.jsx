@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './forms.module.css';
 import { BiSolidMovie } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 
 function SignUp() {
@@ -30,6 +31,9 @@ function SignUp() {
                                  <span className={styles.google} >SignUp with Google</span>
                             </div>
                         </div>
+                    </div>
+                    <div className={styles.bottom} >
+                        <p> Already have a account ?  <Link to="/login"> LogIn </Link> </p>
                     </div>
                 </div>
             </div>
