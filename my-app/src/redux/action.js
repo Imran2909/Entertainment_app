@@ -6,6 +6,11 @@ export const toggleThemeAction = () => {
 }
 
 export const addBookmark = (payload) => {
+    try {
+        
+    } catch (error) {
+        
+    }
     return { type: ADD_BOOKMARK, payload }
 }
 
@@ -57,10 +62,10 @@ export const requestMovieDataFetch = (payload) => async (dispatch) => {
 }
 
 export const requestTvSeriesDataFetch = (payload) => async (dispatch) => {
-    try {          
+    try {
         const response = await axios.get(payload)
         return dispatch({ type: TVSERIES_DATA_FETCH_COMPLETED, payload: response.data.results })
-    } catch (error) {            
+    } catch (error) {
         dispatch({ type: DATA_FETCH_FAILED })
     }
 }

@@ -5,17 +5,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, removeBookmark } from '../redux/action'
 import { FaRegBookmark } from "react-icons/fa";
 import { IoMdBookmark } from "react-icons/io";
-import { Link, Route } from 'react-router-dom';
-
+import { Link, redirect, Route, useNavigate } from 'react-router-dom';
 
 
 function Component({ IDe, ...props }) {
     const bookmark = useSelector((store) => store.bookmark)
-
+    const auth = useSelector((store) => store.isAuth)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const AddBookmark = (ID) => {
-        dispatch(addBookmark(ID))
+        if (auth) {
+            navigate("/login")
+        } else {
+            dispatch(addBookmark(ID))
+        }
+
     }
+
     const RemoveBookmark = (ID) => {
         dispatch(removeBookmark(ID))
     }
@@ -54,7 +61,7 @@ function Component({ IDe, ...props }) {
                 </div>
                 <div className={styles.name} >
                     {
-                    props.title ?
+                        props.title ?
                             props.title && props.title.length > 21 ? props.title.slice(0, 20) + "..." : props.title :
                             props.name && props.name.length > 21 ? props.name.slice(0, 20) + "..." : props.name
                     }

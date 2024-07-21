@@ -2,7 +2,7 @@ const express = require("express")
 const jwt = require("jsonwebtoken")
 const userModel = require("../models/user.model")
 const bcrypt = require("bcrypt")
-
+const fs = require("fs")
 const userRouter = express.Router()
 
 userRouter.post("/signup", (req, res) => {
@@ -16,7 +16,7 @@ userRouter.post("/signup", (req, res) => {
             if (err) {
                 res.send({ "msg": error.message })
             } else {
-                const user = new userModel({ email, password: hash, bookmark: [{ movie: [] }, { tvSeries: [] }] })
+                const user = new userModel({ email, password: hash, bookmark: [{ movie: [], tvSeries: [] }] })
                 await user.save()
                 res.send({ "msg": "User Registered success" })
             }
@@ -33,8 +33,14 @@ userRouter.post("/login", async (req, res) => {
         if (user.length > 0) {
             bcrypt.compare(password, user[0].password, (err, result) => {
                 if (result) {
-                    console.log(user)
-                    var token = jwt.sign({ foo: 'bar' }, "imran");
+                    let val = user[0]._id.toString()
+                    fs.writeFile('userData.txt',val , (err) => {
+                        if (err) {
+                            console.error('Error writing to file', err);
+                        }
+                    });
+
+                    var token = jwt.sign({ data: user[0].email }, "imran");
                     res.send({ "msg": "login successful", "token": token })
                 }
                 else {
@@ -49,6 +55,8 @@ userRouter.post("/login", async (req, res) => {
         res.send({ "msg": error.message })
     }
 })
+
+
 
 module.exports = {
     userRouter

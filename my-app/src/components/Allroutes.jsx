@@ -8,6 +8,7 @@ import SingleDetail from "../pages/SingleDetail"
 import SingleSeries from '../pages/SingleSeries'
 import SignUp from '../pages/SignUp'
 import Login from '../pages/Login'
+import PrivateRoute from './PrivateRoute'
 
 
 function Allroutes() {
@@ -17,7 +18,12 @@ function Allroutes() {
       <Route path='/home' element={<Home />} />
       <Route path='/movies' element={<Movies />} />
       <Route path='/tvseries' element={<TvSeries />} />
-      <Route path='/bookmark' element={<Bookmark />} />
+      <Route path='/bookmark' element={
+        <PrivateRoute>
+          <Bookmark />
+        </PrivateRoute>
+      }
+      />
       <Route path='/movieDetail/:id' element={<SingleDetail />} />
       <Route path='/tvSeriesDetail/:id' element={<SingleSeries />} />
       <Route path="/signup" element={<SignUp />} />
