@@ -133,10 +133,10 @@ import { FaRegBookmark } from "react-icons/fa";
 import { IoMdBookmark } from "react-icons/io";
 import { Tooltip, Button } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBookmark, removeBookmark, requestAction, requestTrendingDataFetch } from '../redux/action';
+import {  addMovieBookmark, getMoviesBookmark, removeBookmark, removeMovieBookmark, requestAction, requestTrendingDataFetch } from '../redux/action';
 
 function XscrollBox(props) {
-    const bookmark = useSelector((store) => store.bookmark);
+    const moviesBookmark = useSelector((store) => store.moviesBookmark);
     const dispatch = useDispatch();
     const loading = useSelector((store) => store.isLoading);
     const error = useSelector((store) => store.isError);
@@ -145,14 +145,15 @@ function XscrollBox(props) {
     useEffect(() => {
         dispatch(requestAction());
         dispatch(requestTrendingDataFetch(props.api));
+        dispatch(getMoviesBookmark())
     }, [dispatch, props.api]);
 
     const addBookmarkHandler = (ID) => {
-        dispatch(addBookmark(ID));
+        dispatch(addMovieBookmark({ "movieId": ID }));
     };
 
     const removeBookmarkHandler = (ID) => {
-        dispatch(removeBookmark(ID));
+        dispatch(removeMovieBookmark({ "movieId": ID }));
     };
 
 
@@ -170,7 +171,7 @@ function XscrollBox(props) {
                                 <div className={styles.bookmark}>
                                     <Tooltip label='' placement='top' bg='teal.600'>
                                         <Button style={{ border: "none" }}>
-                                            {bookmark.includes(el.id) ? 
+                                            {moviesBookmark.includes(el.id) ? 
                                                 <IoMdBookmark onClick={() => removeBookmarkHandler(el.id)} className={styles.booked} /> : 
                                                 <FaRegBookmark onClick={() => addBookmarkHandler(el.id)} />
                                             }
@@ -200,7 +201,7 @@ function XscrollBox(props) {
                                 <div className={styles.bookmark}>
                                     <Tooltip label='' placement='top' bg='teal.600'>
                                         <Button style={{ border: "none" }}>
-                                            {bookmark.includes(el.id) ? 
+                                            {moviesBookmark.includes(el.id) ? 
                                                 <IoMdBookmark onClick={() => removeBookmarkHandler(el.id)} className={styles.booked} /> : 
                                                 <FaRegBookmark onClick={() => addBookmarkHandler(el.id)} />
                                             }

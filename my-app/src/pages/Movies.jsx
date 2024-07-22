@@ -11,12 +11,12 @@ function Movies() {
   const data = useSelector((store) => store.movies);
   const [page, setPage] = useState(1)
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
     dispatch(requestAction())
     dispatch(requestMovieDataFetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=5ae304b91cd12d71e100db44c6812cb6&language=en-US&page=${page}`))
   }, [dispatch]);
-
+  
   return (
     <div className={styles.box} >
       <div className={styles.navbar}>

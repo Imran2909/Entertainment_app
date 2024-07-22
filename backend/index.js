@@ -2,41 +2,48 @@ const express = require("express")
 const app = express()
 const { connection } = require("./db")
 const fs = require("fs")
+const cors = require('cors')
 const { userRouter } = require("./routes/user.route")
 const { authenticate } = require("./middleware/middleware")
 const userModel = require("./models/user.model")
 app.use(express.json())
+app.use(cors())
 
 app.get("/", (req, res) => {
     res.send("Home page")
 })
 
+
 app.use("/user", userRouter)
 
 
-app.put("/addBookmark", async (req, res) => {
-    // Read the user ID from 'userData.txt'
+app.put("/addTvSeriesBookmark", async (req, res) => {
     fs.readFile('userData.txt', 'utf8', async (err, data) => {
         if (err) {
             console.error('Error reading file', err);
             return res.status(500).send('Error reading file');
-        }
-
-        try {
-            // Find the user by ID
-            const user = await userModel.findById(data);
+        } try {
+            const userId = data.trim();
+            const movieId = req.body.movieId;
+            if (!movieId) {
+                return res.status(400).send('Movie ID is required');
+            }
+            const user = await userModel.findById(userId);
             if (!user) {
                 return res.status(404).send('User not found');
             }
-            // res.send(user)
-            // Update the bookmark array
-            const updatedBookmark = [...user.bookmark[0].movie]
-            updatedBookmark.push(req.body.movieId)
-            user.bookmark[0].movie = updatedBookmark;
-
-            // Save the updated user document
-            await user.save();
-            console.log(user.bookmark[0].movie)
+            // Update the bookmark array using findByIdAndUpdate
+            const updatedUser = await userModel.findByIdAndUpdate(
+                userId,
+                {
+                    $push: { 'bookmark.0.tvSeries': movieId }
+                },
+                { new: true, useFindAndModify: false }
+            );
+            if (!updatedUser) {
+                return res.status(404).send('User not found');
+            }
+            // console.log(updatedUser.bookmark[0].movie);
             res.send('Bookmark updated successfully');
         } catch (error) {
             console.error('Error updating bookmark', error);
@@ -45,8 +52,158 @@ app.put("/addBookmark", async (req, res) => {
     });
 });
 
-app.get("/usr",(req,res)=>{
-    
+app.put("/removeTvSeriesBookmark", async (req, res) => {
+    fs.readFile('userData.txt', 'utf8', async (err, data) => {
+        if (err) {
+            console.error('Error reading file', err);
+            return res.status(500).send('Error reading file');
+        }
+        try {
+            const userId = data.trim();
+            const movieId = req.body.movieId;
+            if (!movieId) {
+                return res.status(400).send('Movie ID is required');
+            }
+            const user = await userModel.findById(userId);
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+            // Update the bookmark array using findByIdAndUpdate
+            const updatedUser = await userModel.findByIdAndUpdate(
+                userId,
+                {
+                    $pull: { 'bookmark.0.tvSeries': movieId }
+                },
+                { new: true, useFindAndModify: false }
+            );
+            if (!updatedUser) {
+                return res.status(404).send('User not found');
+            }
+            res.send('Bookmark removed successfully');
+        } catch (error) {
+            console.error('Error updating bookmark', error);
+            res.status(500).send('Error updating bookmark');
+        }
+    });
+});
+
+
+app.put("/addMovieBookmark", async (req, res) => {
+    fs.readFile('userData.txt', 'utf8', async (err, data) => {
+        if (err) {
+            console.error('Error reading file', err);
+            return res.status(500).send('Error reading file');
+        } try {
+            const userId = data.trim();
+            const movieId = req.body.movieId;
+            if (!movieId) {
+                return res.status(400).send('Movie ID is required');
+            }
+            const user = await userModel.findById(userId);
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+            const updatedUser = await userModel.findByIdAndUpdate(
+                userId,
+                {
+                    $push: { 'bookmark.0.movie': movieId }
+                },
+                { new: true, useFindAndModify: false }
+            );
+            if (!updatedUser) {
+                return res.status(404).send('User not found');
+            }
+            // console.log(updatedUser.bookmark[0].movie);
+            res.send('Bookmark updated successfully');
+        } catch (error) {
+            console.error('Error updating bookmark', error);
+            res.status(500).send('Error updating bookmark');
+        }
+    });
+});
+
+app.put("/removeMovieBookmark", async (req, res) => {
+    fs.readFile('userData.txt', 'utf8', async (err, data) => {
+        if (err) {
+            console.error('Error reading file', err);
+            return res.status(500).send('Error reading file');
+        }
+        try {
+            const userId = data.trim();
+            console.log(req.body.movieId);
+            const movieId = req.body.movieId;
+            if (!movieId) {
+                return res.status(400).send('Movie ID is required');
+            }
+            const user = await userModel.findById(userId);
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+            // Update the bookmark array using findByIdAndUpdate
+            const updatedUser = await userModel.findByIdAndUpdate(
+                userId,
+                {
+                    $pull: { 'bookmark.0.movie': movieId }
+                },
+                { new: true, useFindAndModify: false }
+            );
+            if (!updatedUser) {
+                return res.status(404).send('User not found');
+            }
+            res.send('Bookmark removed successfully');
+        } catch (error) {
+            console.error('Error updating bookmark', error);
+            res.status(500).send('Error updating bookmark');
+        }
+    });
+});
+
+
+app.get("/getMovieBookmark", async (req, res) => {
+    fs.readFile('userData.txt', 'utf8', async (err, data) => {
+        if (err) {
+            console.error('Error reading file', err);
+            return res.status(500).send('Error reading file');
+        }
+        try {
+            const userId = data.trim();
+            const user = await userModel.findById(userId);
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+            res.send(user.bookmark[0].movie);
+        } catch (error) {
+            console.error('Error retrieving bookmarks', error);
+            res.status(500).send('Error retrieving bookmarks');
+        }
+    });
+});
+
+
+app.get("/getTvSeriesBookmark", async (req, res) => {
+    fs.readFile('userData.txt', 'utf8', async (err, data) => {
+        if (err) {
+            console.error('Error reading file', err);
+            return res.status(500).send('Error reading file');
+        }
+        try {
+            const userId = data.trim();
+            const user = await userModel.findById(userId);
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+            res.send(user.bookmark[0].tvSeries);
+        } catch (error) {
+            console.error('Error retrieving bookmarks', error);
+            res.status(500).send('Error retrieving bookmarks');
+        }
+    });
+});
+
+
+
+app.get("/usr", (req, res) => {
+
 })
 
 app.use(authenticate)

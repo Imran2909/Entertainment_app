@@ -6,6 +6,10 @@ const initialState = {
     theme: "light",
     avatar: "https://img1.pnghut.com/t/22/13/22/7vKZnT8gWz/symbol-black-and-white-user-profile-information-monochrome.jpg",
     bookmark: [],
+    moviesBookmark: [],
+    tvSeriesBookmark: [],
+    moviesBookmarkData: [],
+    tvSeriesBookmarkData: [],
     isLoading: false,
     isError: false,
     trendingData: [],
@@ -14,7 +18,7 @@ const initialState = {
     tvSeries:[],
     singleSeries:[],
     singleMovie:[],
-    isAuth:false
+    isAuth:true
 };
 
 const middleware = [thunk];

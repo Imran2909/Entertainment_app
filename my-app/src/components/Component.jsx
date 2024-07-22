@@ -1,38 +1,55 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './component.module.css'
 import { TbMovie } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
-import { addBookmark, removeBookmark } from '../redux/action'
+import { addMovieBookmark, addTvSeriesBookmark, getBookmark, getMoviesBookmark, getTvSeriesBookmark, removeBookmark, removeMovieBookmark, removeTvSeriesBookmark } from '../redux/action'
 import { FaRegBookmark } from "react-icons/fa";
 import { IoMdBookmark } from "react-icons/io";
 import { Link, redirect, Route, useNavigate } from 'react-router-dom';
 
 
 function Component({ IDe, ...props }) {
-    const bookmark = useSelector((store) => store.bookmark)
+    const moviesBookmark = useSelector((store) => store.moviesBookmark)
+    const tvSeriesBookmark = useSelector((store) => store.tvSeriesBookmark)
     const auth = useSelector((store) => store.isAuth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const AddBookmark = (ID) => {
-        if (auth) {
+        if (!auth) {
             navigate("/login")
         } else {
-            dispatch(addBookmark(ID))
+            if (IDe < 20) {
+                dispatch(addMovieBookmark({ "movieId": ID }))
+            } else {
+                dispatch(addTvSeriesBookmark({ "movieId": ID }))
+            }
         }
-
     }
 
+    useEffect(() => {
+        dispatch(getMoviesBookmark())
+        dispatch(getTvSeriesBookmark())
+    }, [dispatch])
+    
     const RemoveBookmark = (ID) => {
-        dispatch(removeBookmark(ID))
+        if (IDe < 20) {
+            dispatch(removeMovieBookmark({ "movieId": ID }))
+            dispatch(getMoviesBookmark())
+        } else {
+            dispatch(removeTvSeriesBookmark({ "movieId": ID }))
+            dispatch(getTvSeriesBookmark())
+        }
     }
 
     return (
         <div>
             <div className={styles.container} >
                 <div className={styles.bookmark} >
-                    {
-                        bookmark.length > 0 && bookmark.includes(props.id) ? <IoMdBookmark onClick={() => RemoveBookmark(props.id)} className={styles.booked} /> :
+                    { IDe < 20 ?
+                        moviesBookmark.length > 0 && moviesBookmark.includes(props.id) ? <IoMdBookmark onClick={() => RemoveBookmark(props.id)} className={styles.booked} /> :
+                            <FaRegBookmark onClick={() => AddBookmark(props.id)} /> :
+                        tvSeriesBookmark.length > 0 && tvSeriesBookmark.includes(props.id) ? <IoMdBookmark onClick={() => RemoveBookmark(props.id)} className={styles.booked} /> :
                             <FaRegBookmark onClick={() => AddBookmark(props.id)} />
                     }
                 </div>
@@ -43,8 +60,6 @@ function Component({ IDe, ...props }) {
                         <img src={`https://image.tmdb.org/t/p/w200${props.backdrop_path}`} alt="" />
                     </Link>
                 }
-
-
                 <div className={styles.desc} >
                     <p className={styles['josefin-sans']}>
                         <span>

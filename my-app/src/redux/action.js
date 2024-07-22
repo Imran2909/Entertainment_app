@@ -1,22 +1,144 @@
-import { ADD_BOOKMARK, DATA_FETCH_FAILED, FETCH_MOVIES_SUCCESS, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REQUEST_ACTION, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
+import { useSelector } from "react-redux"
+import { ADD_MOVIES_BOOKMARK, ADD_TV_SERIES_BOOKMARK, DATA_FETCH_FAILED, FETCH_BOOKMARK_MOVIES_SUCCESS, FETCH_BOOKMARK_TV_SERIES_SUCCESS, FETCH_MOVIES_SUCCESS, GET_BOOKMARK, GET_MOVIES_BOOKMARK, GET_TV_SERIES_BOOKMARK, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REMOVE_MOVIES_BOOKMARK, REMOVE_TV_SERIES_BOOKMARK, REQUEST_ACTION, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
 import axios from 'axios'
 
 export const toggleThemeAction = () => {
     return { type: TOGGLE_THEME }
 }
 
-export const addBookmark = (payload) => {
+
+
+export const requestFetchBookmarkMovies = () => async (dispatch) => {
     try {
-        
+        const ids = await axios.get("http://localhost:8050/getMovieBookmark");
+        dispatch({
+            type: GET_MOVIES_BOOKMARK,
+            payload: ids.data
+        });
+        const promises = ids.data.map((id) =>
+            axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=5ae304b91cd12d71e100db44c6812cb6`)
+        );
+        const responses = await Promise.all(promises);
+        const movies = responses.map((response) => response.data);
+        console.log(movies, "from req.fet.mov.book")
+        dispatch({
+            type: FETCH_BOOKMARK_MOVIES_SUCCESS,
+            payload: movies
+        })
     } catch (error) {
-        
+        console.log(error)
     }
-    return { type: ADD_BOOKMARK, payload }
 }
 
-export const removeBookmark = (payload) => {
-    return { type: REMOVE_BOOKMARK, payload }
+
+export const requestFetchBookmarkTvSeries = () => async (dispatch) => {
+    try {
+        const ids = await axios.get("http://localhost:8050/getTvSeriesBookmark");
+        dispatch({
+            type: GET_TV_SERIES_BOOKMARK,
+            payload: ids.data
+        });
+        const promises = ids.data.map((id) =>
+            axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=5ae304b91cd12d71e100db44c6812cb6`)
+        );
+        const responses = await Promise.all(promises);
+        const movies = responses.map((response) => response.data);
+        console.log(movies, "from req.fet.mov.book")
+        dispatch({
+            type: FETCH_BOOKMARK_TV_SERIES_SUCCESS ,
+            payload: movies
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
+
+
+export const addMovieBookmark = (payload) => async (dispatch) => {
+    try {
+        const response = await axios.put("http://localhost:8050/addMovieBookmark", payload);
+        if (response.status === 200) {
+            dispatch({
+                type: ADD_MOVIES_BOOKMARK,
+                payload: payload.movieId
+            });
+        }
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+
+export const removeMovieBookmark = (payload) => async (dispatch) => {
+    try {
+        const response = await axios.put("http://localhost:8050/removeMovieBookmark", payload);
+        if (response.status === 200) {
+            dispatch({
+                type: REMOVE_MOVIES_BOOKMARK,
+                payload: payload.movieId
+            });
+        }
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+
+export const addTvSeriesBookmark = (payload) => async (dispatch) => {
+    try {
+        const response = await axios.put("http://localhost:8050/addTvSeriesBookmark", payload);
+        if (response.status === 200) {
+            dispatch({
+                type: ADD_TV_SERIES_BOOKMARK,
+                payload: payload.movieId
+            });
+        }
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+
+export const removeTvSeriesBookmark = (payload) => async (dispatch) => {
+    try {
+        const response = await axios.put("http://localhost:8050/removeTvSeriesBookmark", payload);
+        if (response.status === 200) {
+            dispatch({
+                type: REMOVE_TV_SERIES_BOOKMARK,
+                payload: payload.movieId
+            });
+        }
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+
+export const getMoviesBookmark = () => async (dispatch) => {
+    try {
+        const response = await axios.get("http://localhost:8050/getMovieBookmark");
+        return dispatch({
+            type: GET_MOVIES_BOOKMARK,
+            payload: response.data
+        });
+    } catch (error) {
+        console.error('Failed to fetch movies', error);
+    }
+}
+
+
+export const getTvSeriesBookmark = () => async (dispatch) => {
+    try {
+        const response = await axios.get("http://localhost:8050/getTvSeriesBookmark");
+        return dispatch({
+            type: GET_TV_SERIES_BOOKMARK,
+            payload: response.data
+        });
+    } catch (error) {
+        console.error('Failed to fetch movies', error);
+    }
+}
+
 
 export const fetchMovies = () => async (dispatch) => {
     try {
