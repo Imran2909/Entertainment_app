@@ -43,9 +43,9 @@ function Sidebar() {
                     </div>
                     <div className={styles.bottom} >
                         <div onClick={toggleTheme} className={theme === "light" ? styles.lightTheme : styles.darkTheme} >
-                            {
+                            {/* {
                                 theme === "light" ? <IoSunny /> : <IoMoonSharp />
-                            }
+                            } */}
                         </div>
                         <div className={styles.avatar}  >
                             <NavLink to={'/signup'} >

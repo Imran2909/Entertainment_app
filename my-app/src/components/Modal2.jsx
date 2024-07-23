@@ -1,19 +1,14 @@
 import React from 'react';
-import styles from './Modal.module.css';
+import styles from './Modal.module.css'; // Ensure the path and styles are correct
 
-const Modal2 = ({ show, handleClose, handleLogin }) => {
-  if (!show) {
-    return null;
-  }
-
+const Modal2 = ({ message, onClose, onConfirm }) => {
   return (
-    <div className={styles.modalBackdrop}>
+    <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <h2>You are not authenticated</h2>
-        <p>Please login first</p>
-        <div className={styles.modalActions}>
-          <button onClick={handleClose} className={styles.leaveButton}>Leave anyway</button>
-          <button onClick={handleLogin} className={styles.loginButton}>Proceed to login</button>
+        <h2>{message}</h2>
+        <div className={styles.modalButtons}>
+          <button onClick={onClose}>Leave Anyway</button>
+          <button onClick={onConfirm}>Go to Login</button>
         </div>
       </div>
     </div>

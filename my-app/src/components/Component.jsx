@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import styles from './component.module.css'
 import { TbMovie } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
-import { addMovieBookmark, addTvSeriesBookmark, getBookmark, getMoviesBookmark, getTvSeriesBookmark, removeBookmark, removeMovieBookmark, removeTvSeriesBookmark } from '../redux/action'
+import { addMovieBookmark, addTvSeriesBookmark, getMoviesBookmark, getTvSeriesBookmark, removeMovieBookmark, removeTvSeriesBookmark } from '../redux/action'
 import { FaRegBookmark } from "react-icons/fa";
 import { IoMdBookmark } from "react-icons/io";
-import { Link, redirect, Route, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function Component({ IDe, ...props }) {
@@ -26,7 +26,7 @@ function Component({ IDe, ...props }) {
             }
         }
     }
-
+   
     useEffect(() => {
         dispatch(getMoviesBookmark())
         dispatch(getTvSeriesBookmark())

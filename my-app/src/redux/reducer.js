@@ -6,12 +6,30 @@ export const reducer = (state, { type, payload }) => {
             return { ...state, theme: state.theme === "light" ? "dark" : "light" }
         case ADD_MOVIES_BOOKMARK:
             return { ...state, moviesBookmark: [...state.moviesBookmark, payload] }
+
+
+        // case REMOVE_MOVIES_BOOKMARK:
+        //     return { ...state, moviesBookmark: state.moviesBookmark.filter((movieId) => movieId !== payload) }
+        // case REMOVE_TV_SERIES_BOOKMARK:
+        //     return { ...state, tvSeriesBookmark: state.tvSeriesBookmark.filter((movieId) => movieId !== payload) }
+
         case REMOVE_MOVIES_BOOKMARK:
-            return { ...state, moviesBookmark: [...payload] }
+            return {
+                ...state,
+                moviesBookmark: state.moviesBookmark.filter((movieId) => movieId !== payload),
+                moviesBookmarkData: state.moviesBookmarkData.filter((movie) => movie.id !== payload)
+            };
+
+        case REMOVE_TV_SERIES_BOOKMARK:
+            return {
+                ...state,
+                tvSeriesBookmark: state.tvSeriesBookmark.filter((seriesId) => seriesId !== payload),
+                tvSeriesBookmarkData: state.tvSeriesBookmarkData.filter((series) => series.id !== payload)
+            };
+
+
         case ADD_TV_SERIES_BOOKMARK:
             return { ...state, tvSeriesBookmark: [...state.tvSeriesBookmark, payload] }
-        case REMOVE_TV_SERIES_BOOKMARK:
-            return { ...state, tvSeriesBookmark: [...payload] }
         case GET_MOVIES_BOOKMARK:
             return { ...state, moviesBookmark: payload }
         case GET_TV_SERIES_BOOKMARK:
