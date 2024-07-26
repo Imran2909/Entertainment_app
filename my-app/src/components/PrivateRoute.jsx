@@ -11,6 +11,7 @@
 //     return auth ? children : <>{<Modal2/> }<Navigate state={location.pathname} to={"/login"} /></>
 // }
 
+
 // export default PrivateRoute
 
 
@@ -19,7 +20,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Modal2 from './Modal2';
 
