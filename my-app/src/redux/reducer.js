@@ -1,4 +1,4 @@
-import { ADD_BOOKMARK, ADD_MOVIES_BOOKMARK, ADD_TV_SERIES_BOOKMARK, DATA_FETCH_FAILED, FETCH_BOOKMARK_MOVIES_SUCCESS, FETCH_BOOKMARK_TV_SERIES_SUCCESS, GET_BOOKMARK, GET_MOVIES_BOOKMARK, GET_TV_SERIES_BOOKMARK, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REMOVE_MOVIES_BOOKMARK, REMOVE_TV_SERIES_BOOKMARK, REQUEST_ACTION, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
+import { ADD_BOOKMARK, ADD_MOVIES_BOOKMARK, ADD_TV_SERIES_BOOKMARK, DATA_FETCH_FAILED, FETCH_BOOKMARK_MOVIES_SUCCESS, FETCH_BOOKMARK_TV_SERIES_SUCCESS, GET_BOOKMARK, GET_MOVIES_BOOKMARK, GET_TV_SERIES_BOOKMARK, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REMOVE_MOVIES_BOOKMARK, REMOVE_TV_SERIES_BOOKMARK, REQUEST_ACTION, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
 
 export const reducer = (state, { type, payload }) => {
     switch (type) {
@@ -54,6 +54,14 @@ export const reducer = (state, { type, payload }) => {
             return { ...state, isLoading: false, isError: false, singleSeries: payload }
         case SINGLE_MOVIE_DATA_FETCH_COMPLETED:
             return { ...state, isLoading: false, isError: false, singleMovie: payload }
+        case LOGIN_REQUEST:
+            return { ...state, isLoading: true }
+        case LOGIN_FAILURE:
+            return { ...state, isLoading: false, isError: true }
+        case LOGIN_SUCCESS:
+            return { ...state, isLoading: false, isAuth: true, token: payload, isError: false }
+        case LOGOUT:
+            return { ...state, isAuth: false }
         default:
             return state
     }

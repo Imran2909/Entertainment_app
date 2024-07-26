@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./sidebar.module.css"
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Allroutes from './Allroutes'
 import { BiSolidMovie } from "react-icons/bi";
 import { PiSquaresFourFill } from "react-icons/pi";
@@ -9,21 +9,39 @@ import { PiTelevisionFill } from "react-icons/pi";
 import { FaBookmark } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { IoSunny } from "react-icons/io5";
-import { toggleThemeAction } from '../redux/action';
+import { logout, toggleThemeAction } from '../redux/action';
 import { IoMoonSharp } from "react-icons/io5";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import Alert from './Alert';
 
 function Sidebar() {
     const theme = useSelector((store) => store.theme)
     const avatar = useSelector((store) => store.avatar)
     const dispatch = useDispatch()
-
+    const auth = useSelector((store) => store.isAuth)
+    const navigate= useNavigate()
+    const [showAlert, setShowAlert] = useState(false);
+    
     const toggleTheme = () => {
         console.log(theme);
         dispatch(toggleThemeAction())
     }
+    
+    const handleLogout=()=>{
+        dispatch(logout())
+        setShowAlert(true);
+        navigate("/")
+    }
 
     return (
         <div>
+            {showAlert && (
+                <Alert
+                    message="Log out success"
+                    type="error" // can be 'info', 'success', 'warning', 'error'
+                    onClose={() => setShowAlert(false)}
+                />
+            )}
             <div className={styles.box}>
                 <div className={styles.container} >
                     <div className={styles.top} >
@@ -42,11 +60,12 @@ function Sidebar() {
                         </div>
                     </div>
                     <div className={styles.bottom} >
-                        <div onClick={toggleTheme} className={theme === "light" ? styles.lightTheme : styles.darkTheme} >
-                            {/* {
-                                theme === "light" ? <IoSunny /> : <IoMoonSharp />
-                            } */}
-                        </div>
+                        {auth ?
+                            <div className={styles.logout} >
+                                <RiLogoutBoxLine onClick={handleLogout} />
+                            </div> : " "
+                        }
+
                         <div className={styles.avatar}  >
                             <NavLink to={'/signup'} >
                                 <img src={avatar} alt="No" />

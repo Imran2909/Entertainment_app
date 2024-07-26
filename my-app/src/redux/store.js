@@ -18,7 +18,8 @@ const initialState = {
     tvSeries:[],
     singleSeries:[],
     singleMovie:[],
-    isAuth:false
+    isAuth:false,
+    token:""
 };
 
 const middleware = [thunk];

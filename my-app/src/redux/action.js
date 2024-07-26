@@ -1,12 +1,10 @@
 import { useSelector } from "react-redux"
-import { ADD_MOVIES_BOOKMARK, ADD_TV_SERIES_BOOKMARK, DATA_FETCH_FAILED, FETCH_BOOKMARK_MOVIES_SUCCESS, FETCH_BOOKMARK_TV_SERIES_SUCCESS, FETCH_MOVIES_SUCCESS, GET_BOOKMARK, GET_MOVIES_BOOKMARK, GET_TV_SERIES_BOOKMARK, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REMOVE_MOVIES_BOOKMARK, REMOVE_TV_SERIES_BOOKMARK, REQUEST_ACTION, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
+import { ADD_MOVIES_BOOKMARK, ADD_TV_SERIES_BOOKMARK, DATA_FETCH_FAILED, FETCH_BOOKMARK_MOVIES_SUCCESS, FETCH_BOOKMARK_TV_SERIES_SUCCESS, FETCH_MOVIES_SUCCESS, GET_BOOKMARK, GET_MOVIES_BOOKMARK, GET_TV_SERIES_BOOKMARK, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REMOVE_MOVIES_BOOKMARK, REMOVE_TV_SERIES_BOOKMARK, REQUEST_ACTION, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
 import axios from 'axios'
 
 export const toggleThemeAction = () => {
     return { type: TOGGLE_THEME }
 }
-
-
 
 export const requestFetchBookmarkMovies = () => async (dispatch) => {
     try {
@@ -45,7 +43,7 @@ export const requestFetchBookmarkTvSeries = () => async (dispatch) => {
         const movies = responses.map((response) => response.data);
         console.log(movies, "from req.fet.mov.book")
         dispatch({
-            type: FETCH_BOOKMARK_TV_SERIES_SUCCESS ,
+            type: FETCH_BOOKMARK_TV_SERIES_SUCCESS,
             payload: movies
         })
     } catch (error) {
@@ -208,6 +206,21 @@ export const requestSingleSeriesDataFetch = (payload) => async (dispatch) => {
     } catch (error) {
         dispatch({ type: DATA_FETCH_FAILED })
     }
+}
+
+
+export const login = (userData) => (dispatch) => {
+    dispatch({ type: LOGIN_REQUEST })
+    return axios.post("http://localhost:8050/user/login", userData).then((res) => {
+        console.log("login success");
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data.token })
+    }).catch((err) => {
+        dispatch({ type: LOGIN_FAILURE, payload: err.message })
+    })
+}
+
+export const logout = () => {
+    return { type: LOGOUT }
 }
 
 

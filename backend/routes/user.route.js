@@ -31,6 +31,7 @@ userRouter.post("/login", async (req, res) => {
     try {
         const user = await userModel.find({ email })
         if (user.length > 0) {
+            console.log(1);
             bcrypt.compare(password, user[0].password, (err, result) => {
                 if (result) {
                     let val = user[0]._id.toString()
@@ -41,7 +42,7 @@ userRouter.post("/login", async (req, res) => {
                     });
 
                     var token = jwt.sign({ data: user[0].email }, "imran");
-                    res.send({ "msg": "login successful", "token": token })
+                    res.send({"token": token })
                 }
                 else {
                     res.send({ "msg": err.message })
