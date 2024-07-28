@@ -1,4 +1,5 @@
 const express = require("express")
+// const passport = require("./config/google-oauth");
 const app = express()
 const { connection } = require("./db")
 const fs = require("fs")
@@ -7,14 +8,33 @@ const { userRouter } = require("./routes/user.route")
 const { authenticate } = require("./middleware/middleware")
 const userModel = require("./models/user.model")
 app.use(express.json())
+const session = require('cookie-session');
+const passport = require('./config/google-oauth');
 app.use(cors())
 
 app.get("/", (req, res) => {
     res.send("Home page")
 })
 
+app.use(
+    session({
+        maxAge: 24 * 60 * 60 * 1000,
+        keys: "imran",
+    })
+);
 
 app.use("/user", userRouter)
+
+
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile','email'] }));
+  
+  app.get('/auth/google/callback', 
+    passport.authenticate('google', { failureRedirect: '/login', session:false }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/');
+    });
 
 
 app.put("/addTvSeriesBookmark", async (req, res) => {
@@ -51,6 +71,7 @@ app.put("/addTvSeriesBookmark", async (req, res) => {
         }
     });
 });
+
 
 app.put("/removeTvSeriesBookmark", async (req, res) => {
     fs.readFile('userData.txt', 'utf8', async (err, data) => {
@@ -202,10 +223,10 @@ app.get("/getTvSeriesBookmark", async (req, res) => {
 });
 
 
-
 app.get("/usr", (req, res) => {
 
 })
+
 
 app.use(authenticate)
 app.listen(8050, async () => {

@@ -50,8 +50,6 @@ function Bookmark() {
   //           )): <h1 style={{width:"600px"}}>No tv series in bookmark</h1>
   //       }
   //     </div>
-
-        
   //   </div>
   // ) 
 
@@ -59,7 +57,8 @@ function Bookmark() {
   return (
     <div className={styles.box}>
         <div className={styles.navbar}>
-            <Navbar text="movies" />
+            {/* <Navbar text="movies" /> */}
+            <h2>Bookmark</h2>
         </div>
         <div className={styles.heading}>
             Movies

@@ -40,6 +40,7 @@
     margin-bottom: 22px;
     font-size: 32px;
     margin-top: 20px;
+    color: #ffffff;
 }
 
 .container1 {
@@ -55,6 +56,7 @@
 }
 
 .heading1 {
+    color: #ffffff;
     margin-left: 60px;
     margin-bottom: 22px;
     font-size: 32px;
@@ -66,6 +68,10 @@
 }
 
 .box{
-height: 97.2vh;
+    height: 97.2vh;
 }
-
+.navbar h2{
+    color:white;
+    margin-left: 50px;
+    font-size: 32px;
+}

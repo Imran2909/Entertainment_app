@@ -7,12 +7,6 @@ export const reducer = (state, { type, payload }) => {
         case ADD_MOVIES_BOOKMARK:
             return { ...state, moviesBookmark: [...state.moviesBookmark, payload] }
 
-
-        // case REMOVE_MOVIES_BOOKMARK:
-        //     return { ...state, moviesBookmark: state.moviesBookmark.filter((movieId) => movieId !== payload) }
-        // case REMOVE_TV_SERIES_BOOKMARK:
-        //     return { ...state, tvSeriesBookmark: state.tvSeriesBookmark.filter((movieId) => movieId !== payload) }
-
         case REMOVE_MOVIES_BOOKMARK:
             return {
                 ...state,
@@ -61,7 +55,7 @@ export const reducer = (state, { type, payload }) => {
         case LOGIN_SUCCESS:
             return { ...state, isLoading: false, isAuth: true, token: payload, isError: false }
         case LOGOUT:
-            return { ...state, isAuth: false }
+            return { ...state, isAuth: false, moviesBookmark:[], tvSeriesBookmark:[], moviesBookmarkData:[], tvSeriesBookmarkData:[]  }
         default:
             return state
     }

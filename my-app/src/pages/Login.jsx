@@ -80,19 +80,24 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showAlert, setShowAlert] = useState(false);
+    
 
     useEffect(() => {
         // Set showAlert to true when the component mounts to show the alert
         setShowAlert(true);
     }, []);
 
+
+    // console.log(location.state);
     const handleLogin = () => {
         const userData = { email, password };
         dispatch(login(userData)).then(() => {
             // Navigate to the previous page if available, else navigate to home
-            navigate(location.state?.from || "/");
+            console.log(location.state);
+            navigate(location.state || "/");
         });
     };
+
 
     return (
         <div>
@@ -123,7 +128,7 @@ function Login() {
                                 />
                                 <br /><br />
                                 <input
-                                    type="password"
+                                    type="text"
                                     placeholder='Password'
                                     onChange={(e) => setPassword(e.target.value)}
                                     value={password}
@@ -131,6 +136,14 @@ function Login() {
                                 />
                                 <br /><br />
                                 <button onClick={handleLogin}>Log In</button>
+                                
+                                <div className={styles.oauth} >
+                                <span className={styles.gImg} >
+                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB1oG9GOtnAuqAzA8iBgPP68Ry22JnGVEnnQ&s" alt="" />
+                                </span>
+                                 <span className={styles.google} >Login with Google</span>
+                            </div>
+                                
                             </form>
                         </div>
                     </div>

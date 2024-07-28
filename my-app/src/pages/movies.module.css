@@ -40,6 +40,7 @@
     margin-bottom: 22px;
     font-size: 32px;
     margin-top: 20px;
+    color: white;
 }
 
 .container>div {
@@ -50,3 +51,29 @@
 height: 97.2vh;
 }
 
+.pagination{
+    /* border: 1px solid red; */
+    padding-bottom: 30px;
+    align-items: center;
+    display: inline-block;
+    width: auto;
+    margin-left: 39.7%;
+    margin-top: 10px;
+
+}
+
+.pagination button{
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    color: white;
+    font-size: 22px;
+}
+
+.pagination button b{
+    color: white;
+    font-size: 32px;
+    margin-top: -10px;
+    height: auto;
+    display: block;
+}

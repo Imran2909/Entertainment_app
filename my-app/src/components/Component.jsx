@@ -63,7 +63,7 @@ function Component({ IDe, ...props }) {
                 <div className={styles.desc} >
                     <p className={styles['josefin-sans']}>
                         <span>
-                            {props.release_date ? props.release_date.slice(0, 4) : props.first_air_date.slice(0, 4)}
+                            {props.release_date && props.release_date ? props.release_date.slice(0, 4) : props.first_air_date.slice(0, 4)}
                         </span>
                         <span className={styles.dot}></span>
                         <TbMovie className={styles.small} />
