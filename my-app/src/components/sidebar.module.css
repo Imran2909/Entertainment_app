@@ -29,13 +29,13 @@
 
 .logo {
     color: red;
-    font-size: 28px;
+    font-size: 30px;
     margin: 20px;
     height: 100px;
 }
 
 .logo svg{
-    
+    margin: -28px 3px 5px 18px;
 }
 
 .top {
@@ -48,9 +48,10 @@
 .icons a {
     color: #b7bdd1;
     font-size: 22px;
+
 }
 .icons a svg{
-    margin: 12px 22px;
+    margin: 30px 21px;
 }
 
 .bottom{

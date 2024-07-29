@@ -18,8 +18,8 @@ const initialState = {
     tvSeries:[],
     singleSeries:[],
     singleMovie:[],
-    isAuth:false,
-    token:""
+    isAuth: !!localStorage.getItem('token'), // Check if token exists in localStorage
+    token: localStorage.getItem('token') || "" // Retrieve token from localStorage
 };
 
 const middleware = [thunk];

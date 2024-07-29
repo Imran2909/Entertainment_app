@@ -83,18 +83,19 @@ function Login() {
     
 
     useEffect(() => {
-        // Set showAlert to true when the component mounts to show the alert
         setShowAlert(true);
     }, []);
 
 
-    // console.log(location.state);
     const handleLogin = () => {
         const userData = { email, password };
-        dispatch(login(userData)).then(() => {
-            // Navigate to the previous page if available, else navigate to home
-            console.log(location.state);
-            navigate(location.state || "/");
+        dispatch(login(userData)).then((success) => {
+            if (success) {
+                navigate(location.state || "/");
+            } else {
+                // Handle login failure, e.g., show an error message
+                console.log("Login failed, staying on login page");
+            }
         });
     };
 
@@ -136,7 +137,7 @@ function Login() {
                                 />
                                 <br /><br />
                                 <button onClick={handleLogin}>Log In</button>
-                                
+
                                 <div className={styles.oauth} >
                                 <span className={styles.gImg} >
                                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB1oG9GOtnAuqAzA8iBgPP68Ry22JnGVEnnQ&s" alt="" />

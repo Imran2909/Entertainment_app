@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import styles from './component.module.css'
-import { TbMovie } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovieBookmark, addTvSeriesBookmark, getMoviesBookmark, getTvSeriesBookmark, removeMovieBookmark, removeTvSeriesBookmark } from '../redux/action'
 import { FaRegBookmark } from "react-icons/fa";
@@ -66,7 +65,7 @@ function Component({ IDe, ...props }) {
                             {props.release_date && props.release_date ? props.release_date.slice(0, 4) : props.first_air_date.slice(0, 4)}
                         </span>
                         <span className={styles.dot}></span>
-                        <TbMovie className={styles.small} />
+                        {/* <TbMovie className={styles.small} /> */}
                         <span className={styles.media}>{
                             IDe < 20 ? "Movie" : "TV Show"
                         }</span>

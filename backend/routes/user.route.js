@@ -26,36 +26,69 @@ userRouter.post("/signup", (req, res) => {
     }
 })
 
+// userRouter.post("/login", async (req, res) => {
+//     const { email, password } = req.body
+//     try {
+//         const user = await userModel.find({ email })
+//         if (user.length > 0) {
+//             console.log('login');
+//             bcrypt.compare(password, user[0].password, (err, result) => {
+//                 if (result) {
+//                     let val = user[0]._id.toString()
+//                     fs.writeFile('userData.txt',val , (err) => {
+//                         if (err) {
+//                             console.error('Error writing to file', err);
+//                         }
+//                     });
+//                     var token = jwt.sign({ data: user[0].email }, "imran");
+//                     res.send({"token": token })
+//                 }
+//                 else {
+//                     res.send({ "msg": err.message })
+//                 }
+//             });
+//         }
+//         else {
+//             console.log('user not found');
+//             res.send({ "msg": "err.message" })
+//         }
+//     } catch (error) {
+//         res.send({ "msg": error.message })
+//     }
+// })
+
+
 userRouter.post("/login", async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body;
     try {
-        const user = await userModel.find({ email })
+        const user = await userModel.find({ email });
         if (user.length > 0) {
-            console.log(1);
+            console.log('User found, attempting login');
             bcrypt.compare(password, user[0].password, (err, result) => {
+                if (err) {
+                    return res.status(500).send({ msg: "Internal server error" });
+                }
                 if (result) {
-                    let val = user[0]._id.toString()
-                    fs.writeFile('userData.txt',val , (err) => {
+                    let val = user[0]._id.toString();
+                    fs.writeFile('userData.txt', val, (err) => {
                         if (err) {
                             console.error('Error writing to file', err);
                         }
                     });
-
                     var token = jwt.sign({ data: user[0].email }, "imran");
-                    res.send({"token": token })
-                }
-                else {
-                    res.send({ "msg": err.message })
+                    return res.status(200).send({ token: token });
+                } else {
+                    return res.status(401).send({ msg: "Invalid password" });
                 }
             });
-        }
-        else {
-            res.send({ "msg": "err.message" })
+        } else {
+            console.log('User not found');
+            return res.status(404).send({ msg: "User not found" });
         }
     } catch (error) {
-        res.send({ "msg": error.message })
+        return res.status(500).send({ msg: error.message });
     }
-})
+});
 
 
 

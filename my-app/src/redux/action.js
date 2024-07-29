@@ -210,16 +210,33 @@ export const requestSingleSeriesDataFetch = (payload) => async (dispatch) => {
 
 
 export const login = (userData) => (dispatch) => {
-    dispatch({ type: LOGIN_REQUEST })
-    return axios.post("http://localhost:8050/user/login", userData).then((res) => {
-        console.log("login success");
-        dispatch({ type: LOGIN_SUCCESS, payload: res.data.token })
-    }).catch((err) => {
-        dispatch({ type: LOGIN_FAILURE, payload: err.message })
-    })
-}
+    dispatch({ type: LOGIN_REQUEST });
+    return axios.post("http://localhost:8050/user/login", userData)
+        .then((res) => {
+            console.log("Response status:", res.status);
+            if (res.status === 200) {
+                console.log("login success");
+                dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
+                localStorage.setItem('token', res.data.token);
+                return true; // Return true on success
+            } else {
+                console.log("Unexpected response status:", res.status);
+                dispatch({ type: LOGIN_FAILURE, payload: res.data.msg });
+                return false; // Return false on unexpected status
+            }
+        })
+        .catch((err) => {
+            const errorMessage = err.response ? err.response.data.msg : err.message;
+            console.log("login fail with error:", errorMessage);
+            dispatch({ type: LOGIN_FAILURE, payload: errorMessage });
+            return false; // Return false on failure
+        });
+};
+
+
 
 export const logout = () => {
+    localStorage.removeItem('token');
     return { type: LOGOUT }
 }
 

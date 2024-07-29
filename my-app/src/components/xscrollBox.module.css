@@ -10,7 +10,7 @@
     height: 168px;
     flex-shrink: 0;
     object-fit: cover;
-    animation: scroll 300s linear infinite;
+    /* animation: scroll 300s linear infinite; */
     /* border: 1px solid white; */
 }
 
@@ -83,7 +83,7 @@
 .box h2 {
     position: relative;
     font-size: 18px;
-    margin: 4px 9px;
+    margin: -4px 10px;
     color: rgb(255, 255, 255);
     font-weight: 500;
     text-decoration: none;
@@ -126,8 +126,8 @@ a h2 {
     position: relative;
     width: 8px;
     height: auto;
-    padding: 4px 2px 1px 19px;
-    margin: 10px 2px -35px 263px;
+    padding: 0px 0px 0px 28px;
+    margin: 20px -1px -42px 260px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -139,8 +139,9 @@ a h2 {
 }
 
 .bookmark svg {
-    margin: 2px -2px 4px -23px;
-    padding: 0px 0px 0px 0px;
+    margin:5px -3px 0px -22px;
+    /* padding: 0px 0px 0px 0px; */
+    padding-bottom: -4px;
     font-size: 15px;
     color: rgb(255, 255, 255);
     font-weight: 900;
@@ -154,7 +155,7 @@ a h2 {
 }
 
 .bookmark svg:hover {
-    margin: 1px -2px 4px -23px;
+    /* margin: 1px -2px 4px -23px; */
     font-size: 16px;
     transition: 0.25s;
 }
