@@ -10,7 +10,7 @@
     height: 168px;
     flex-shrink: 0;
     object-fit: cover;
-    /* animation: scroll 300s linear infinite; */
+    animation: scroll 300s linear infinite;
     /* border: 1px solid white; */
 }
 

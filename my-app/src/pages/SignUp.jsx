@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './forms.module.css';
 import { BiSolidMovie } from "react-icons/bi";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signup } from '../redux/action';
+import { useDispatch } from 'react-redux';
+
+
 
 
 function SignUp() {
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
+    const [resetPassword,setResetPassword] = useState("")
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleSignup = (e) => {
+        e.preventDefault()
+        const userData = { email, password, resetPassword };
+        dispatch(signup(userData)).then((success) => {
+            if (success) {
+                navigate("/login");
+            } else {
+                console.log("Signup failed, staying on login page");
+            }
+        });
+    };
+
+
     return (
         <div>
             <div className={styles.main} >
@@ -17,11 +40,11 @@ function SignUp() {
                             SignUp
                         </div>
                         <div className={styles.form} >
-                            <form action="">
-                                <input type="text" placeholder='Email address' required /> <br /><br />
-                                <input type="text" placeholder='Password' required /><br /><br />
-                                <input type="text" placeholder='Confirm password' required /><br /><br />
-                                <button> Create an account </button>
+                            <form action=""  >
+                                <input type="text" placeholder='Email address' value={email} onChange={(e)=>{setEmail(e.target.value)}} required /> <br /><br />
+                                <input type="text" placeholder='Password' value={password} onChange={(e)=>{setPassword(e.target.value)}} required /><br /><br />
+                                <input type="text" placeholder='Confirm password' value={resetPassword} onChange={(e)=>{setResetPassword(e.target.value)}} required /><br /><br />
+                                <button onClick={handleSignup} > Create an account </button>
                             </form>
 
                             <div className={styles.oauth} >

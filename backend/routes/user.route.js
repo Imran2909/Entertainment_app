@@ -18,6 +18,7 @@ userRouter.post("/signup", (req, res) => {
             } else {
                 const user = new userModel({ email, password: hash, bookmark: [{ movie: [], tvSeries: [] }] })
                 await user.save()
+                console.log("new user created");
                 res.send({ "msg": "User Registered success" })
             }
         });

@@ -1,40 +1,48 @@
 const express = require("express")
-// const passport = require("./config/google-oauth");
-const app = express()
 const { connection } = require("./db")
 const fs = require("fs")
 const cors = require('cors')
 const { userRouter } = require("./routes/user.route")
 const { authenticate } = require("./middleware/middleware")
 const userModel = require("./models/user.model")
+const session = require('express-session');
+const passport = require('passport');
+require('./config/google-oauth');
+
+const app = express()
 app.use(express.json())
-const session = require('cookie-session');
-const passport = require('./config/google-oauth');
 app.use(cors())
+
+app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 
 app.get("/", (req, res) => {
     res.send("Home page")
 })
-
-app.use(
-    session({
-        maxAge: 24 * 60 * 60 * 1000,
-        keys: "imran",
-    })
-);
+app.get("/fail", (req, res) => {
+    res.send("fail page")
+})
+app.get("/success", (req, res) => {
+    res.send("success page")
+})
 
 app.use("/user", userRouter)
 
 
 app.get('/auth/google',
-    passport.authenticate('google', { scope: ['profile','email'] }));
-  
-  app.get('/auth/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/login', session:false }),
-    function(req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/');
-    });
+    passport.authenticate('google', { scope: ['email', 'profile'] }
+    ));
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: 'http://localhost:3000/',
+        failureRedirect: '/fail'
+    })
+);
 
 
 app.put("/addTvSeriesBookmark", async (req, res) => {
@@ -72,7 +80,6 @@ app.put("/addTvSeriesBookmark", async (req, res) => {
     });
 });
 
-
 app.put("/removeTvSeriesBookmark", async (req, res) => {
     fs.readFile('userData.txt', 'utf8', async (err, data) => {
         if (err) {
@@ -108,7 +115,6 @@ app.put("/removeTvSeriesBookmark", async (req, res) => {
     });
 });
 
-
 app.put("/addMovieBookmark", async (req, res) => {
     fs.readFile('userData.txt', 'utf8', async (err, data) => {
         if (err) {
@@ -142,7 +148,6 @@ app.put("/addMovieBookmark", async (req, res) => {
         }
     });
 });
-
 
 app.put("/removeMovieBookmark", async (req, res) => {
     fs.readFile('userData.txt', 'utf8', async (err, data) => {
@@ -180,7 +185,6 @@ app.put("/removeMovieBookmark", async (req, res) => {
     });
 });
 
-
 app.get("/getMovieBookmark", async (req, res) => {
     fs.readFile('userData.txt', 'utf8', async (err, data) => {
         if (err) {
@@ -200,7 +204,6 @@ app.get("/getMovieBookmark", async (req, res) => {
         }
     });
 });
-
 
 app.get("/getTvSeriesBookmark", async (req, res) => {
     fs.readFile('userData.txt', 'utf8', async (err, data) => {
@@ -222,11 +225,9 @@ app.get("/getTvSeriesBookmark", async (req, res) => {
     });
 });
 
-
 app.get("/usr", (req, res) => {
 
 })
-
 
 app.use(authenticate)
 app.listen(8050, async () => {

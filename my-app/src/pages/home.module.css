@@ -11,7 +11,7 @@
     padding-bottom: 8px;
 }
 .top h1{
-    margin: 10px 0px 0px 410px;
+    margin: -4px 0px 0px 410px;
     color: white;
     font-size: 36px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -27,7 +27,7 @@
 }
 
 .content:first-child {
-    /* border: 1px solid; */
+    /* border: 1px solid red; */
 }
 
 .main1 {
