@@ -11,24 +11,29 @@ require('./config/google-oauth');
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+    credentials: true
+}
+app.use(cors({origin:"*"}));
+
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'cats',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true } 
+}));
 
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-
-
 app.get("/", (req, res) => {
     res.send("Home page")
 })
-app.get("/fail", (req, res) => {
-    res.send("fail page")
-})
-app.get("/success", (req, res) => {
-    res.send("success page")
-})
+
 
 app.use("/user", userRouter)
 

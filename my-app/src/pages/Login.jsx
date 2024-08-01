@@ -70,8 +70,10 @@ import { BiSolidMovie } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../redux/action';
+import { login, oauthLogin } from '../redux/action';
 import Alert from "../components/Alert";
+import { useToast } from '@chakra-ui/react'
+
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -80,10 +82,11 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showAlert, setShowAlert] = useState(false);
-    
+    const toast = useToast()
+
 
     useEffect(() => {
-        setShowAlert(true);
+        // setShowAlert(true);
     }, []);
 
 
@@ -91,21 +94,38 @@ function Login() {
         const userData = { email, password };
         dispatch(login(userData)).then((success) => {
             if (success) {
+                toast({
+                    title: `Login success`,
+                    status: 'success',
+                    duration: 4000,
+                    position: 'top',
+                    isClosable: true,
+                })
                 navigate(location.state || "/");
             } else {
                 // Handle login failure, e.g., show an error message
-                console.log("Login failed, staying on login page");
+                toast({
+                    title: `Login failed, please try again`,
+                    status: 'error',
+                    duration: 4000,
+                    position: 'top',
+                    isClosable: true,
+                })
             }
         });
     };
 
+    const handleOath = () => {
+        dispatch(oauthLogin())
+        window.location.href = "http://localhost:8050/auth/google";
+    }
 
     return (
         <div>
             {showAlert && (
                 <Alert
                     message="Please authenticate to continue"
-                    type="error" // can be 'info', 'success', 'warning', 'error'
+                    type="error"
                     onClose={() => setShowAlert(false)}
                 />
             )}
@@ -129,7 +149,7 @@ function Login() {
                                 />
                                 <br /><br />
                                 <input
-                                    type="text"
+                                    type="password"
                                     placeholder='Password'
                                     onChange={(e) => setPassword(e.target.value)}
                                     value={password}
@@ -139,12 +159,12 @@ function Login() {
                                 <button onClick={handleLogin}>Log In</button>
 
                                 <div className={styles.oauth} >
-                                <span className={styles.gImg} >
-                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB1oG9GOtnAuqAzA8iBgPP68Ry22JnGVEnnQ&s" alt="" />
-                                </span>
-                                 <span className={styles.google} >Login with Google</span>
-                            </div>
-                                
+                                    <span className={styles.gImg} >
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB1oG9GOtnAuqAzA8iBgPP68Ry22JnGVEnnQ&s" alt="" />
+                                    </span>
+                                    <span className={styles.google} onClick={handleOath} >Login with Google</span>
+                                </div>
+
                             </form>
                         </div>
                     </div>

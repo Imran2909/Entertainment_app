@@ -1,5 +1,10 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const jwt = require("jsonwebtoken")
+const userModel = require("../models/user.model")
+const bcrypt = require("bcrypt")
+const fs = require("fs")
+
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -7,14 +12,42 @@ passport.use(new GoogleStrategy({
   callbackURL: "http://localhost:8050/auth/google/callback",
   passReqToCallback: true,
 },
-function(request, accessToken, refreshToken, profile, done) {
-  return done(null, profile);
-}));
+  async function (request, accessToken, refreshToken, profile, done) {
+    const password = 'aaa'
+    const email = profile._json.email
 
-passport.serializeUser(function(user, done) {
+    const user = await userModel.find({ email });
+    if (user.length > 0) {
+      console.log('User found, attempting login');
+
+      let val = user[0]._id.toString();
+      fs.writeFile('userData.txt', val, (err) => {
+        if (err) {
+          console.error('Error writing to file', err);
+        }
+      });
+      var token = jwt.sign({ data: user[0].email }, "imran");
+      // return res.status(200).send({ token: token });
+    } 
+    else {
+      bcrypt.hash(password, 5, async (err, hash) => {
+        if (err) {
+          res.send({ "msg": err.message })
+        } else {
+          const user = new userModel({ email, password: hash, bookmark: [{ movie: [], tvSeries: [] }] })
+          await user.save()
+          console.log("new user created", email);
+        }
+      });
+    }
+    console.log(profile._json.email)
+    return done(null, profile);
+  }));
+
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
   done(null, user);
 });

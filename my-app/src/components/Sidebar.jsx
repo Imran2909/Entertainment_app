@@ -13,6 +13,7 @@ import { logout, toggleThemeAction } from '../redux/action';
 import { IoMoonSharp } from "react-icons/io5";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import Alert from './Alert';
+import { useToast } from '@chakra-ui/react'
 
 function Sidebar() {
     const theme = useSelector((store) => store.theme)
@@ -21,15 +22,22 @@ function Sidebar() {
     const auth = useSelector((store) => store.isAuth)
     const navigate= useNavigate()
     const [showAlert, setShowAlert] = useState(false);
-    
+    const toast = useToast()
+
     const toggleTheme = () => {
         console.log(theme);
         dispatch(toggleThemeAction())
     }
     
     const handleLogout=()=>{
+        toast({
+            title: `Logout success` ,
+            status: 'info',
+            duration: 4000,
+            position:'top',
+            isClosable: true,
+          })
         dispatch(logout())
-        setShowAlert(true);
         navigate("/")
     }
 

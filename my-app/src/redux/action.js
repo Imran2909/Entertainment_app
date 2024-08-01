@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { ADD_MOVIES_BOOKMARK, ADD_TV_SERIES_BOOKMARK, DATA_FETCH_FAILED, FETCH_BOOKMARK_MOVIES_SUCCESS, FETCH_BOOKMARK_TV_SERIES_SUCCESS, FETCH_MOVIES_SUCCESS, GET_BOOKMARK, GET_MOVIES_BOOKMARK, GET_TV_SERIES_BOOKMARK, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, MOVIE_DATA_FETCH_COMPLETED, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REMOVE_MOVIES_BOOKMARK, REMOVE_TV_SERIES_BOOKMARK, REQUEST_ACTION, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
+import { ADD_MOVIES_BOOKMARK, ADD_TV_SERIES_BOOKMARK, DATA_FETCH_FAILED, FETCH_BOOKMARK_MOVIES_SUCCESS, FETCH_BOOKMARK_TV_SERIES_SUCCESS, FETCH_MOVIES_SUCCESS, GET_BOOKMARK, GET_MOVIES_BOOKMARK, GET_TV_SERIES_BOOKMARK, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, MOVIE_DATA_FETCH_COMPLETED, OAUTH_LOGIN_SUCCESS, RECOMMENDED_DATA_FETCH_COMPLETED, REMOVE_BOOKMARK, REMOVE_MOVIES_BOOKMARK, REMOVE_TV_SERIES_BOOKMARK, REQUEST_ACTION, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS, SINGLE_MOVIE_DATA_FETCH_COMPLETED, SINGLE_SERIES_DATA_FETCH_COMPLETED, TOGGLE_THEME, TRENDING_DATA_FETCH_COMPLETED, TVSERIES_DATA_FETCH_COMPLETED } from "./actionTypes"
 import axios from 'axios'
 
 export const toggleThemeAction = () => {
@@ -147,9 +147,11 @@ export const fetchMovies = () => async (dispatch) => {
     }
 }
 
+
 export const requestAction = () => {
     return { type: REQUEST_ACTION }
 }
+
 
 export const requestTrendingDataFetch = (payload) => async (dispatch) => {
     try {
@@ -159,6 +161,7 @@ export const requestTrendingDataFetch = (payload) => async (dispatch) => {
         dispatch({ type: DATA_FETCH_FAILED })
     }
 }
+
 
 export const requestRecommendedDateFetch = (payload) => async (dispatch) => {
     try {
@@ -172,6 +175,7 @@ export const requestRecommendedDateFetch = (payload) => async (dispatch) => {
     }
 }
 
+
 export const requestMovieDataFetch = (payload) => async (dispatch) => {
     try {
         const response = await axios.get(payload)
@@ -180,6 +184,7 @@ export const requestMovieDataFetch = (payload) => async (dispatch) => {
         dispatch({ type: DATA_FETCH_FAILED })
     }
 }
+
 
 export const requestTvSeriesDataFetch = (payload) => async (dispatch) => {
     try {
@@ -190,6 +195,7 @@ export const requestTvSeriesDataFetch = (payload) => async (dispatch) => {
     }
 }
 
+
 export const requestSingleMovieDataFetch = (payload) => async (dispatch) => {
     try {
         const response = await axios.get(payload)
@@ -198,6 +204,7 @@ export const requestSingleMovieDataFetch = (payload) => async (dispatch) => {
         dispatch({ type: DATA_FETCH_FAILED })
     }
 }
+
 
 export const requestSingleSeriesDataFetch = (payload) => async (dispatch) => {
     try {
@@ -233,21 +240,33 @@ export const login = (userData) => (dispatch) => {
         });
 };
 
-export const signup=(userData)=>(dispatch)=>{
-    dispatch({type:SIGNUP_REQUEST});
-    return axios.post("http://localhost:8050/user/signup",userData)
-    .then((res)=>{
-        if (res.status === 200) {
-            console.log("login success");
-            dispatch({ type: SIGNUP_SUCCESS});
-            return true;
-        } else {
-            console.log("Unexpected response status:", res.status);
-            dispatch({ type: SIGNUP_FAILURE, payload: res.data.msg });
-            return false;
-        }
-    })
 
+export const oauthLogin = () => (dispatch) => {
+    try {
+        dispatch({ type: OAUTH_LOGIN_SUCCESS, payload: "res.data.token" })
+        console.log('oauth success from action');
+        localStorage.setItem('token', "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    } catch (error) {
+        console.log('oauth fail from action');
+        dispatch({ type: LOGIN_FAILURE, payload: error.message });
+    }
+}
+
+
+export const signup = (userData) => (dispatch) => {
+    dispatch({ type: SIGNUP_REQUEST });
+    return axios.post("http://localhost:8050/user/signup", userData)
+        .then((res) => {
+            if (res.status === 200) {
+                console.log("login success");
+                dispatch({ type: SIGNUP_SUCCESS });
+                return true;
+            } else {
+                console.log("Unexpected response status:", res.status);
+                dispatch({ type: SIGNUP_FAILURE, payload: res.data.msg });
+                return false;
+            }
+        })
 }
 
 
@@ -255,5 +274,4 @@ export const logout = () => {
     localStorage.removeItem('token');
     return { type: LOGOUT }
 }
-
 

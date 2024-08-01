@@ -98,9 +98,9 @@ form button:hover {
 }
 
 .oauth {
-  /* border: 1px solid purple; */
+  /* border: 2px solid purple; */
   width: 94%;
-  height: 34px;
+  height: 44px;
   font-size: 24px;
   background-color: rgb(255, 255, 255);
   /* border: none; */
@@ -132,7 +132,7 @@ form button:hover {
 
 .oauth:hover {
   width: 95%;
-  height: 36px;
+  height: 46px;
   font-size: 24.5px;
   background-color: rgb(255, 255, 255);
   border: none;

@@ -114,12 +114,15 @@
 
 import React, { useEffect } from 'react';
 import styles from './xscrollBox.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TbMovie } from "react-icons/tb";
 import { FaRegBookmark } from "react-icons/fa";
 import { IoMdBookmark } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovieBookmark, getMoviesBookmark, removeMovieBookmark, requestAction, requestTrendingDataFetch } from '../redux/action';
+import { useToast } from '@chakra-ui/react'
+
+
 
 function XscrollBox(props) {
     const moviesBookmark = useSelector((store) => store.moviesBookmark);
@@ -128,6 +131,8 @@ function XscrollBox(props) {
     const error = useSelector((store) => store.isError);
     const data = useSelector((store) => store.trendingData);
     const isAuth = useSelector((store) => store.isAuth);
+    const toast = useToast()
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(requestAction());
@@ -139,15 +144,46 @@ function XscrollBox(props) {
 
     const addBookmarkHandler = (ID) => {
         if (isAuth) {
-            dispatch(addMovieBookmark({ "movieId": ID }));
+            toast({
+                title: `"${ID.title}" movie added to bookmark`,
+                status: 'info',
+                duration: 4000,
+                position: 'top',
+                isClosable: true,
+            })
+
+            dispatch(addMovieBookmark({ "movieId": ID.id }));
         } else {
-            alert('Please login to bookmark movies.');
+            toast({
+                title: `Please authenticated to continue`,
+                status: 'warning',
+                duration: 4000,
+                position: 'top',
+                isClosable: true,
+            })
+            navigate('/login')
         }
     };
 
     const removeBookmarkHandler = (ID) => {
         if (isAuth) {
-            dispatch(removeMovieBookmark({ "movieId": ID }));
+            toast({
+                title: ` "${ID.title}" movie removed from bookmark`,
+                status: 'info',
+                duration: 4000,
+                position: 'top',
+                isClosable: true,
+            })
+            dispatch(removeMovieBookmark({ "movieId": ID.id }));
+        } else {
+            toast({
+                title: `Please authenticated to continue`,
+                status: 'warning',
+                duration: 4000,
+                position: 'top',
+                isClosable: true,
+            })
+            navigate('/login')
         }
     };
 
@@ -166,8 +202,8 @@ function XscrollBox(props) {
                                         {/* <Tooltip label='' placement='top' bg='teal.600'> */}
                                         <button style={{ border: "none" }}>
                                             {isAuth && moviesBookmark.includes(el.id) ?
-                                                <IoMdBookmark onClick={() => removeBookmarkHandler(el.id)} className={styles.booked} /> :
-                                                <FaRegBookmark onClick={() => addBookmarkHandler(el.id)} />
+                                                <IoMdBookmark onClick={() => removeBookmarkHandler(el)} className={styles.booked} /> :
+                                                <FaRegBookmark onClick={() => addBookmarkHandler(el)} />
                                             }
                                         </button>
                                         {/* </Tooltip> */}
