@@ -11,11 +11,7 @@ require('./config/google-oauth');
 
 const app = express()
 app.use(express.json())
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200,
-    credentials: true
-}
+
 app.use(cors({origin:"*"}));
 
 app.use(session({
@@ -34,20 +30,30 @@ app.get("/", (req, res) => {
     res.send("Home page")
 })
 
+app.get("/fail", (req, res) => {
+    res.send("fail page")
+})
+
 
 app.use("/user", userRouter)
 
 
 app.get('/auth/google',
+    (req, res, next) => {
+        console.log('Redirect URI:', "https://entertainment-backend-w68b.onrender.com/auth/google/callback");
+        next();
+    },
     passport.authenticate('google', { scope: ['email', 'profile'] }
-    ));
+));
+
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://localhost:3000/',
+        successRedirect: 'http://localhost:3000/',  // Update this to your frontend URL in production
         failureRedirect: '/fail'
     })
 );
+
 
 
 app.put("/addTvSeriesBookmark", async (req, res) => {

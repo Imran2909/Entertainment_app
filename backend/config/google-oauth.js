@@ -4,12 +4,12 @@ const jwt = require("jsonwebtoken")
 const userModel = require("../models/user.model")
 const bcrypt = require("bcrypt")
 const fs = require("fs")
-
+require('dotenv').config()
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:8050/auth/google/callback",
+  callbackURL: "https://entertainment-backend-w68b.onrender.com/auth/google/callback",
   passReqToCallback: true,
 },
   async function (request, accessToken, refreshToken, profile, done) {
@@ -51,3 +51,4 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
   done(null, user);
 });
+

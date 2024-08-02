@@ -8,7 +8,7 @@ export const toggleThemeAction = () => {
 
 export const requestFetchBookmarkMovies = () => async (dispatch) => {
     try {
-        const ids = await axios.get("http://localhost:8050/getMovieBookmark");
+        const ids = await axios.get("https://entertainment-backend-w68b.onrender.com/getMovieBookmark");
         dispatch({
             type: GET_MOVIES_BOOKMARK,
             payload: ids.data
@@ -31,7 +31,7 @@ export const requestFetchBookmarkMovies = () => async (dispatch) => {
 
 export const requestFetchBookmarkTvSeries = () => async (dispatch) => {
     try {
-        const ids = await axios.get("http://localhost:8050/getTvSeriesBookmark");
+        const ids = await axios.get("https://entertainment-backend-w68b.onrender.com/getTvSeriesBookmark");
         dispatch({
             type: GET_TV_SERIES_BOOKMARK,
             payload: ids.data
@@ -54,7 +54,7 @@ export const requestFetchBookmarkTvSeries = () => async (dispatch) => {
 
 export const addMovieBookmark = (payload) => async (dispatch) => {
     try {
-        const response = await axios.put("http://localhost:8050/addMovieBookmark", payload);
+        const response = await axios.put("https://entertainment-backend-w68b.onrender.com/addMovieBookmark", payload);
         if (response.status === 200) {
             dispatch({
                 type: ADD_MOVIES_BOOKMARK,
@@ -69,7 +69,7 @@ export const addMovieBookmark = (payload) => async (dispatch) => {
 
 export const removeMovieBookmark = (payload) => async (dispatch) => {
     try {
-        const response = await axios.put("http://localhost:8050/removeMovieBookmark", payload);
+        const response = await axios.put("https://entertainment-backend-w68b.onrender.com/removeMovieBookmark", payload);
         if (response.status === 200) {
             dispatch({
                 type: REMOVE_MOVIES_BOOKMARK,
@@ -84,7 +84,7 @@ export const removeMovieBookmark = (payload) => async (dispatch) => {
 
 export const addTvSeriesBookmark = (payload) => async (dispatch) => {
     try {
-        const response = await axios.put("http://localhost:8050/addTvSeriesBookmark", payload);
+        const response = await axios.put("https://entertainment-backend-w68b.onrender.com/addTvSeriesBookmark", payload);
         if (response.status === 200) {
             dispatch({
                 type: ADD_TV_SERIES_BOOKMARK,
@@ -99,7 +99,7 @@ export const addTvSeriesBookmark = (payload) => async (dispatch) => {
 
 export const removeTvSeriesBookmark = (payload) => async (dispatch) => {
     try {
-        const response = await axios.put("http://localhost:8050/removeTvSeriesBookmark", payload);
+        const response = await axios.put("https://entertainment-backend-w68b.onrender.com/removeTvSeriesBookmark", payload);
         if (response.status === 200) {
             dispatch({
                 type: REMOVE_TV_SERIES_BOOKMARK,
@@ -114,7 +114,7 @@ export const removeTvSeriesBookmark = (payload) => async (dispatch) => {
 
 export const getMoviesBookmark = () => async (dispatch) => {
     try {
-        const response = await axios.get("http://localhost:8050/getMovieBookmark");
+        const response = await axios.get("https://entertainment-backend-w68b.onrender.com/getMovieBookmark");
         return dispatch({
             type: GET_MOVIES_BOOKMARK,
             payload: response.data
@@ -127,7 +127,7 @@ export const getMoviesBookmark = () => async (dispatch) => {
 
 export const getTvSeriesBookmark = () => async (dispatch) => {
     try {
-        const response = await axios.get("http://localhost:8050/getTvSeriesBookmark");
+        const response = await axios.get("https://entertainment-backend-w68b.onrender.com/getTvSeriesBookmark");
         return dispatch({
             type: GET_TV_SERIES_BOOKMARK,
             payload: response.data
@@ -218,7 +218,7 @@ export const requestSingleSeriesDataFetch = (payload) => async (dispatch) => {
 
 export const login = (userData) => (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
-    return axios.post("http://localhost:8050/user/login", userData)
+    return axios.post("https://entertainment-backend-w68b.onrender.com/user/login", userData)
         .then((res) => {
             console.log("Response status:", res.status);
             if (res.status === 200) {
@@ -255,7 +255,7 @@ export const oauthLogin = () => (dispatch) => {
 
 export const signup = (userData) => (dispatch) => {
     dispatch({ type: SIGNUP_REQUEST });
-    return axios.post("http://localhost:8050/user/signup", userData)
+    return axios.post("https://entertainment-backend-w68b.onrender.com/user/signup", userData)
         .then((res) => {
             if (res.status === 200) {
                 console.log("login success");

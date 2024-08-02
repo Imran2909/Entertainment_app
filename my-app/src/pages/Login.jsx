@@ -64,6 +64,7 @@
 
 
 
+
 import React, { useEffect, useState } from 'react';
 import styles from './forms.module.css';
 import { BiSolidMovie } from "react-icons/bi";
@@ -117,7 +118,7 @@ function Login() {
 
     const handleOath = () => {
         dispatch(oauthLogin())
-        window.location.href = "http://localhost:8050/auth/google";
+        window.location.href = "https://entertainment-backend-w68b.onrender.com/auth/google/callback";
     }
 
     return (

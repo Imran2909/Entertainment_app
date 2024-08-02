@@ -56,7 +56,7 @@ function SignUp() {
 
     const handleOath = () => {
         dispatch(oauthLogin())
-        window.location.href = "http://localhost:8050/auth/google";
+        window.location.href = "https://entertainment-backend-w68b.onrender.com/auth/google/callback";
     }
 
 
