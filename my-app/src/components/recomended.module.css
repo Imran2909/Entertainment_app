@@ -6,7 +6,7 @@
 }
 
 .container{
-    /* border: 1px solid; */
+    /* border: 1px solid green; */
     height: 350px;
     margin-top: 50px;
     margin-left: 100px;
@@ -17,7 +17,6 @@
     color: white;
 }
 .component{
-    /* border: 1px solid green; */
     height: 325px;
     display: grid;
     row-gap: -10px;
@@ -47,3 +46,187 @@
 }
 
                                                                                                                         
+/* =========================================================================================================== */
+
+
+/* Responsive adjustments */
+@media (max-width: 1360px) { 
+    .component{
+        /* border: 1px solid red; */
+        height: 325px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 10px;
+        grid-template-columns: repeat(5,1fr);
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+@media (max-width: 1250px) { 
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 110px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 325px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 20px;
+        grid-template-columns: repeat(4,1fr);
+        margin-top: 10px;
+    }
+
+}
+
+@media (max-width: 1112px) {
+    .component{
+        /* border: 1px solid red; */
+        height: 325px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(4,1fr);
+        margin-top: 10px;
+    }
+}
+@media (max-width: 1030px) {
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 120px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 355px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(3,1fr);
+        margin-top: 10px;
+    }
+
+}
+
+
+@media (max-width: 915px) { 
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 130px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 355px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(3,1fr);
+        margin-top: 10px;
+    }
+}
+
+
+@media (max-width: 828px) { 
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 130px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 355px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(2,1fr);
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 706px) {
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 135px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 355px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(2,1fr);
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 606px) {     
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 145px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 355px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(1,1fr);
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 566px) {     
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 145px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 355px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(1,1fr);
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 486px) { 
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 155px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 355px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(1,1fr);
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 390px) { 
+    .container{
+        height: 350px;
+        margin-top: 50px;
+        margin-left: 155px;
+    }
+    .component{
+        /* border: 1px solid red; */
+        height: 355px;
+        display: grid;
+        row-gap: -10px;
+        column-gap: 8px;
+        grid-template-columns: repeat(1,1fr);
+        margin-top: 10px;
+    }
+}
+

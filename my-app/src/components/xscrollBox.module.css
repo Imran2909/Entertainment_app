@@ -31,7 +31,6 @@
     padding-top: -4px;
 }
 .box:hover p , .title{
-    /* border: 1px solid; */
     margin-bottom: 4px;
     transition: 0.2s;
     margin-top: -56px;
@@ -39,10 +38,10 @@
 }
 
 .box1 {
+    /* border: 1px solid red; */
     margin-left: 100px;
     height: 160px;
 }
-
 .title {
     font-size: 24px;
     margin-bottom: 8px;
@@ -51,7 +50,6 @@
     margin-left: 1px;
     color: white;
 }
-
 .trending {
     height: 200px;
     display: flex;
@@ -59,17 +57,14 @@
     /* scrollbar-width: thin; */
     scrollbar-color: transparent transparent;
 }
-
 .trending::-webkit-scrollbar {
     width: 4px;
     height: 4px;
 }
-
 .trending::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 2px;
 }
-
 @keyframes scroll {
     0% {
         transform: translateX(0);
@@ -79,7 +74,6 @@
         transform: translateX(calc(-330px*16.4*2));
     }
 }
-
 .box h2 {
     position: relative;
     font-size: 18px;
@@ -88,13 +82,11 @@
     font-weight: 500;
     text-decoration: none;
 }
-
 .box p {
     color: rgb(255, 255, 255);
     margin: 0px 10px;
     margin-top: -50px;
 }
-
 .dot {
     height: 3px;
     width: 3px;
@@ -103,25 +95,19 @@
     display: inline-block;
     margin: 3px 1px;
 }
-
 .small {
     margin: -3px 1px;
 }
-
 .media {
     position: relative;
     margin-right: 8px;
 }
-
 a {
     text-decoration: none;
 }
-
-a p,
-a h2 {
+a p,a h2 {
     text-decoration: none;
 }
-
 .bookmark {
     position: relative;
     width: 8px;
@@ -132,12 +118,10 @@ a h2 {
     background-color: rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
-
 .bookmark:hover {
     background-color: rgba(0, 0, 0, 0.4);
 
 }
-
 .bookmark svg {
     margin:5px -3px 0px -22px;
     /* padding: 0px 0px 0px 0px; */
@@ -147,23 +131,19 @@ a h2 {
     font-weight: 900;
     cursor: pointer;
 }
-
 .booked {
     font-size: 22px;
     scale: 1.3;
     margin: 0px 0px 0px 0px;
 }
-
 .bookmark svg:hover {
     /* margin: 1px -2px 4px -23px; */
     font-size: 16px;
     transition: 0.25s;
 }
-
 .trending:hover .box {
     animation-play-state: paused;
 }
-
 .spinner {
     border: 10px solid #f3f3f3;
     border-top: 10px solid #3498db;
@@ -173,10 +153,55 @@ a h2 {
     animation: spin 2s linear infinite;
     margin: auto;
 }
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
                                                                                                                         
+/* ------------------================================================================== */
+
+
+/* Responsive adjustments */
+@media (max-width: 1200px) { 
+    .box1 {
+        margin-left: 100px;
+        height: 160px;
+    }
+
+}
+
+@media (max-width: 992px) {
+    .box1 {
+        margin-left: 116px;
+        height: 160px;
+    }
+}
+
+@media (max-width: 828px) { 
+    .box1 {
+        margin-left: 130px;
+        height: 160px;
+    }
+}
+
+@media (max-width: 706px) {
+    .box1 {
+        margin-left: 140px;
+        height: 160px;
+    }
+}
+
+@media (max-width: 606px) {     
+    .box1 {
+        margin-left: 145px;
+        height: 160px;
+    }
+}
+
+@media (max-width: 486px) { 
+    .box1 {
+        margin-left: 150px;
+        height: 160px;
+    }
+}

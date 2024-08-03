@@ -5,18 +5,20 @@
 .main {
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 100vh;
     overflow-x: hidden;
     background-color: #212738;
-    padding-bottom: 8px;
+    /* padding-bottom: 28px; */
 }
-.top h1{
+
+.top h1 {
     margin: -4px 0px 0px 410px;
     color: white;
     font-size: 36px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
 }
+
 .content {
     margin-top: 60px;
     flex: 1;
@@ -44,4 +46,77 @@
     /* border: 2px solid red; */
     position: fixed;
     margin-top: -50px;
+}
+
+
+/* ------------------------------------------------------------------------- */
+
+
+@media (max-width: 1200px) {
+    .main {
+        height: 100vh;
+    }
+    .top {
+        position: fixed;
+        margin-left: -30px;
+    }
+
+}
+
+@media (max-width: 992px) {
+    .main {
+        height: 100vh;
+    }
+    .top {
+        position: fixed;
+        margin-left: -150px;
+    }
+}
+
+@media (max-width: 828px) {
+    .top {
+        position: fixed;
+        margin-left: -200px;
+    }
+}
+
+@media (max-width: 706px) {
+    .top {
+        position: fixed;
+        margin-left: -260px;
+    }
+}
+
+@media (max-width: 606px) {
+    .top {
+        position: fixed;
+        margin-left: -280px;
+    }
+
+    .top h1 {
+        margin-top: -2px;
+        font-size: 33px;
+    }
+}
+
+@media (max-width: 486px) {
+    .top {
+        position: fixed;
+        margin-left: -310px;
+    }
+
+    .top h1 {
+        font-size: 29px;
+    }
+}
+
+@media (max-width: 390px) {
+    .top {
+        position: fixed;
+        margin-left: -320px;
+    }
+
+    .top h1 {
+        font-size: 27px;
+    }
 }

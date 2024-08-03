@@ -1,12 +1,12 @@
 .main {
     display: flex;
     flex-direction: column; 
-    height: auto; 
+    height: 100vh; 
     overflow-x: hidden; 
     /* scrollbar-width: thin; * /
     /* scrollbar-color: transparent transparent; */
     background-color: #212738;
-    padding-bottom: 8px;
+    /* padding-bottom: 8px; */
 }
 
 .content {

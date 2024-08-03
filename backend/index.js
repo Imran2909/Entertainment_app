@@ -39,17 +39,12 @@ app.use("/user", userRouter)
 
 
 app.get('/auth/google',
-    (req, res, next) => {
-        console.log('Redirect URI:', "https://entertainment-backend-w68b.onrender.com/auth/google/callback");
-        next();
-    },
     passport.authenticate('google', { scope: ['email', 'profile'] }
 ));
 
-
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://localhost:3000/',  // Update this to your frontend URL in production
+        successRedirect: 'http://localhost:3000/', 
         failureRedirect: '/fail'
     })
 );

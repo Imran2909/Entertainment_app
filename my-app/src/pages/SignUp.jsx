@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { oauthLogin, signup } from '../redux/action';
 import { useDispatch } from 'react-redux';
 import { useToast } from '@chakra-ui/react'
+import { Spinner } from '@chakra-ui/react'
 
 function SignUp() {
     const [email, setEmail] = useState("")
@@ -13,7 +14,7 @@ function SignUp() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const toast = useToast()
-
+    const [spinner, setSpinner] = useState(false)
 
     const handleSignup = (e) => {
         e.preventDefault()
@@ -37,6 +38,7 @@ function SignUp() {
             })
         }
         else {
+            setSpinner(true)
             dispatch(signup(userData)).then((success) => {
                 if (success) {
                     toast({
@@ -55,8 +57,8 @@ function SignUp() {
     };
 
     const handleOath = () => {
+        window.location.href = "https://entertainment-backend-1.onrender.com/auth/google/callback";
         dispatch(oauthLogin())
-        window.location.href = "https://entertainment-backend-w68b.onrender.com/auth/google/callback";
     }
 
 
@@ -73,17 +75,23 @@ function SignUp() {
                         </div>
                         <div className={styles.form} >
                             <form action=""  >
-                                <input type="text" placeholder='Email address' value={email} onChange={(e) => { setEmail(e.target.value) }} required /> <br /><br />
+                                <input type="email" placeholder='Email address' value={email} onChange={(e) => { setEmail(e.target.value) }} required /> <br /><br />
                                 <input type="password" placeholder='Password' value={password} onChange={(e) => { setPassword(e.target.value) }} required /><br /><br />
                                 <input type="password" placeholder='Confirm password' value={resetPassword} onChange={(e) => { setResetPassword(e.target.value) }} required /><br /><br />
-                                <button onClick={handleSignup} > Create an account </button>
+                                <button onClick={handleSignup} >{
+                                        spinner && spinner ? 
+                                        <Spinner size="md" style={{ marginTop: "8px" }} /> :
+                                        "Create an account"
+                                    } </button>
                             </form>
 
                             <div className={styles.oauth} >
                                 <span className={styles.gImg} >
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB1oG9GOtnAuqAzA8iBgPP68Ry22JnGVEnnQ&s" alt="" />
                                 </span>
-                                <span className={styles.google} onClick={handleOath} >SignUp with Google</span>
+                                <span className={styles.google} onClick={handleOath} >
+                                    SignUp with Google
+                                    </span>
                             </div>
                         </div>
                     </div>

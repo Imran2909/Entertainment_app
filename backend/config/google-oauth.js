@@ -9,9 +9,10 @@ require('dotenv').config()
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "https://entertainment-backend-w68b.onrender.com/auth/google/callback",
-  passReqToCallback: true,
+  callbackURL: process.env.OAUTH_CALLBACK_URL,
+  scope: ['email', 'profile']
 },
+
   async function (request, accessToken, refreshToken, profile, done) {
     const password = 'aaa'
     const email = profile._json.email
@@ -19,15 +20,13 @@ passport.use(new GoogleStrategy({
     const user = await userModel.find({ email });
     if (user.length > 0) {
       console.log('User found, attempting login');
-
-      let val = user[0]._id.toString();
-      fs.writeFile('userData.txt', val, (err) => {
-        if (err) {
-          console.error('Error writing to file', err);
-        }
-      });
-      var token = jwt.sign({ data: user[0].email }, "imran");
-      // return res.status(200).send({ token: token });
+      let val = user[0]._id.toString(); 
+      fs.writeFile('userData.txt', val, (err) => { 
+        if (err) { 
+          console.error('Error writing to file', err); 
+        } 
+      }); 
+      var token = jwt.sign({ data: user[0].email }, "imran"); 
     } 
     else {
       bcrypt.hash(password, 5, async (err, hash) => {
@@ -43,6 +42,7 @@ passport.use(new GoogleStrategy({
     console.log(profile._json.email)
     return done(null, profile);
   }));
+
 
 passport.serializeUser(function (user, done) {
   done(null, user);
