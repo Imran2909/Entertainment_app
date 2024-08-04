@@ -25,7 +25,6 @@ function Sidebar() {
     const toast = useToast()
 
     const toggleTheme = () => {
-        console.log(theme);
         dispatch(toggleThemeAction())
     }
     

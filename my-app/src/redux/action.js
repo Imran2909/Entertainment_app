@@ -18,7 +18,7 @@ export const requestFetchBookmarkMovies = () => async (dispatch) => {
         );
         const responses = await Promise.all(promises);
         const movies = responses.map((response) => response.data);
-        console.log(movies, "from req.fet.mov.book")
+        //console.log(movies, "from req.fet.mov.book")
         dispatch({
             type: FETCH_BOOKMARK_MOVIES_SUCCESS,
             payload: movies
@@ -41,7 +41,7 @@ export const requestFetchBookmarkTvSeries = () => async (dispatch) => {
         );
         const responses = await Promise.all(promises);
         const movies = responses.map((response) => response.data);
-        console.log(movies, "from req.fet.mov.book")
+        //console.log(movies, "from req.fet.mov.book")
         dispatch({
             type: FETCH_BOOKMARK_TV_SERIES_SUCCESS,
             payload: movies
@@ -220,21 +220,21 @@ export const login = (userData) => (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     return axios.post("https://entertainment-backend-1.onrender.com/user/login", userData)
         .then((res) => {
-            console.log("Response status:", res.status);
+            //console.log("Response status:", res.status);
             if (res.status === 200) {
-                console.log("login success");
+                //console.log("login success");
                 dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
                 localStorage.setItem('token', res.data.token);
                 return true;
             } else {
-                console.log("Unexpected response status:", res.status);
+                //console.log("Unexpected response status:", res.status);
                 dispatch({ type: LOGIN_FAILURE, payload: res.data.msg });
                 return false;
             }
         })
         .catch((err) => {
             const errorMessage = err.response ? err.response.data.msg : err.message;
-            console.log("login fail with error:", errorMessage);
+            //console.log("login fail with error:", errorMessage);
             dispatch({ type: LOGIN_FAILURE, payload: errorMessage });
             return false;
         });
@@ -244,10 +244,10 @@ export const login = (userData) => (dispatch) => {
 export const oauthLogin = () => (dispatch) => {
     try {
         dispatch({ type: OAUTH_LOGIN_SUCCESS, payload: "res.data.token" })
-        console.log('oauth success from action');
+        //console.log('oauth success from action');
         localStorage.setItem('token', "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     } catch (error) {
-        console.log('oauth fail from action');
+        //console.log('oauth fail from action');
         dispatch({ type: LOGIN_FAILURE, payload: error.message });
     }
 }
@@ -258,11 +258,11 @@ export const signup = (userData) => (dispatch) => {
     return axios.post("https://entertainment-backend-1.onrender.com/user/signup", userData)
         .then((res) => {
             if (res.status === 200) {
-                console.log("login success");
+                //console.log("login success");
                 dispatch({ type: SIGNUP_SUCCESS });
                 return true;
             } else {
-                console.log("Unexpected response status:", res.status);
+                //console.log("Unexpected response status:", res.status);
                 dispatch({ type: SIGNUP_FAILURE, payload: res.data.msg });
                 return false;
             }

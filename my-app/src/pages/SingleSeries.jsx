@@ -23,7 +23,6 @@ function SingleSeries() {
   useEffect(() => {
     dispatch(requestAction());
     dispatch(requestSingleSeriesDataFetch(`https://api.themoviedb.org/3/tv/${id}?api_key=5ae304b91cd12d71e100db44c6812cb6`));
-    console.log(series);
   }, [dispatch]);
 
   const openModal = (query) => {

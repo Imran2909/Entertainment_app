@@ -193,5 +193,110 @@ form button:hover {
 .bottom1>p>a{
   color: red;
   margin-left: 2px;
+
 }
+
+
+@media (max-width: 1360px) { 
+  .box {
+    /* border: 1px solid white; */
+    width: 45%;
+    margin: auto;
+    height: 90%;
+  }
+}
+@media (max-width: 1250px) { 
+  .box {
+    width: 50%;
+    margin: auto;
+    height: 90%;
+  }
+}
+@media (max-width: 1112px) { 
+  .box {
+    width: 55%;
+    margin: auto;
+    height: 90%;
+  }
+}
+@media (max-width: 1030px) { 
+  .box {
+    width: 60%;
+    margin: auto;
+    height: 90%;
+  }
+}
+@media (max-width: 915px) { 
+  .box {
+    width: 65%;
+    margin: auto;
+    height: 90%;
+  }
+}
+@media (max-width: 828px) { 
+  .box {
+    width: 70%;
+    margin: auto;
+    height: 90%;
+  }
+}
+@media (max-width: 706px) { 
+  .box {
+    width: 75%;
+    margin: auto;
+    height: 90%;
+  }
+}
+@media (max-width: 606px) { 
+  .box {
+    width: 80%;
+    margin: auto;
+    height: 90%;
+  }
+  form button{
+    font-size: 22px;
+  }
+  .gImg{
+    margin: 0px 10px 0px -10px;
+  }
+  .google{
+    font-size: 22px;
+  }
+}
+@media (max-width: 566px) { 
+  .box {
+    width: 85%;
+    margin: auto;
+    height: 90%;
+  }
+  form button{
+    font-size: 22px;
+  }
+  .gImg{
+    margin: 0px 10px 0px -24px;
+  }
+  .google{
+    font-size: 20px;
+  }
+}
+@media (max-width: 436px) { 
+  .box {
+    width: 94%;
+    margin: auto;
+    height: 90%;
+  }
+  form button{
+    font-size: 20px;
+  }
+  .gImg{
+    margin: 0px 10px 0px -24px;
+  }
+  .google{
+    font-size: 18px;
+  }
+}
+
+
+
+
 

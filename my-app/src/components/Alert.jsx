@@ -1,15 +1,14 @@
-// Alert.jsx
 import React, { useEffect } from 'react';
-import styles from './Alert.module.css'; // Ensure this file is styled appropriately
+import styles from './Alert.module.css';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const Alert = ({ message, type = 'info', onClose, duration = 3000 }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      onClose(); // Automatically close the alert after the specified duration
+      onClose(); 
     }, duration);
 
-    return () => clearTimeout(timer); // Clean up the timer on unmount
+    return () => clearTimeout(timer); 
   }, [onClose, duration]);
 
   return (

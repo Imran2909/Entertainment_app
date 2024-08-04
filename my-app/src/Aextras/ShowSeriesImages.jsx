@@ -27,7 +27,6 @@ const ShowSeriesImages = (props) => {
         },
       });
       const movieImages = imagesResponse.data.backdrops.slice(0, 12)
-      console.log("series images", movieImages);
       setImages(movieImages);
     };
     handleSearch()

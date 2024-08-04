@@ -19,7 +19,6 @@ const YouTubeSearch = ({ query }) => {
               key: apiKey,
             },
           });
-          console.log("API response:", response.data); // Log the response data
           if (response.data.items.length > 0) {
             setVideo(response.data.items[0]);
           } else {

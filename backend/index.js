@@ -8,6 +8,7 @@ const userModel = require("./models/user.model")
 const session = require('express-session');
 const passport = require('passport');
 require('./config/google-oauth');
+require('dotenv').config()
 
 const app = express()
 app.use(express.json())
@@ -25,7 +26,6 @@ app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.get("/", (req, res) => {
     res.send("Home page")
 })
@@ -34,9 +34,7 @@ app.get("/fail", (req, res) => {
     res.send("fail page")
 })
 
-
 app.use("/user", userRouter)
-
 
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['email', 'profile'] }
@@ -44,12 +42,10 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://localhost:3000/', 
+        successRedirect: process.env.CALLBACK_URL , 
         failureRedirect: '/fail'
     })
 );
-
-
 
 app.put("/addTvSeriesBookmark", async (req, res) => {
     fs.readFile('userData.txt', 'utf8', async (err, data) => {
@@ -236,6 +232,7 @@ app.get("/usr", (req, res) => {
 })
 
 app.use(authenticate)
+
 app.listen(8050, async () => {
     try {
         await connection
