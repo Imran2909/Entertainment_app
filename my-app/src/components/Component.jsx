@@ -42,6 +42,7 @@ function Component({ IDe, ...props }) {
                     isClosable: true,
                 })
                 dispatch(addMovieBookmark({ "movieId": ID.id }));
+                console.log(ID.id);
             } else {
                 toast({
                     title: `"${ID.name}" series added to bookmark`,

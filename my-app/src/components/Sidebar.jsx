@@ -20,22 +20,22 @@ function Sidebar() {
     const avatar = useSelector((store) => store.avatar)
     const dispatch = useDispatch()
     const auth = useSelector((store) => store.isAuth)
-    const navigate= useNavigate()
+    const navigate = useNavigate()
     const [showAlert, setShowAlert] = useState(false);
     const toast = useToast()
 
     const toggleTheme = () => {
         dispatch(toggleThemeAction())
     }
-    
-    const handleLogout=()=>{
+
+    const handleLogout = () => {
         toast({
-            title: `Logout success` ,
+            title: `Logout success`,
             status: 'info',
             duration: 4000,
-            position:'top',
+            position: 'top',
             isClosable: true,
-          })
+        })
         dispatch(logout())
         navigate("/")
     }
@@ -70,14 +70,13 @@ function Sidebar() {
                         {auth ?
                             <div className={styles.logout} >
                                 <RiLogoutBoxLine onClick={handleLogout} />
-                            </div> : " "
+                            </div> :
+                            <div className={styles.avatar}  >
+                                <NavLink to={'/signup'} >
+                                    <img src={avatar} alt="No" />
+                                </NavLink>
+                            </div>
                         }
-
-                        <div className={styles.avatar}  >
-                            <NavLink to={'/signup'} >
-                                <img src={avatar} alt="No" />
-                            </NavLink>
-                        </div>
                     </div>
                 </div>
             </div>
