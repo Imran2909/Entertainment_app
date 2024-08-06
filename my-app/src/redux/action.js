@@ -247,7 +247,7 @@ export const oauthLogin = () => (dispatch) => {
     try {
         dispatch({ type: OAUTH_LOGIN_SUCCESS, payload: "res.data.token" })
         //console.log('oauth success from action');
-        localStorage.setItem('token', "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        localStorage.setItem('token', Math.random()*10000);
     } catch (error) {
         //console.log('oauth fail from action');
         dispatch({ type: LOGIN_FAILURE, payload: error.message });
