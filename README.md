@@ -1,7 +1,7 @@
 # Entertainment App
 
 The Entertainment App is a platform where you can find the latest movies and TV series. You can view the IMDb ratings for any movie or TV series and watch trailers. You can also add movies and series to your bookmarks.
-
+ 
 ## Acknowledgements
 
 - Website link: [Netlify](https://verdant-pie-aa1d2f.netlify.app/)
